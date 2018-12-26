@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:52:10 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 19:56:00 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/22 11:23:23 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		main(void)
+char	*ft_strdup(const char *s1)
 {
-	int a;
-	int b[2];
+	char	*copy;
+	size_t	len;
 
-	a = -2341;
-	/* printf("[%010.20l%]\n", 10, 7, 5); */
-	b[0] = ft_printf("My number is [%d]!\n", a);
-	b[1] = printf("My number is [%d]!\n", a);
-
-	ft_printf("res1 = %d\n", b[0]);
-	printf("{%d}\n", ft_printf("res2 = %d\n", b[1]));
-	return (0);
+	len = ft_strlen(s1);
+	copy = (char *)malloc(len + 1);
+	if (!copy)
+		return (NULL);
+	ft_memcpy(copy, s1, len);
+	copy[len] = '\0';
+	return (copy);
 }

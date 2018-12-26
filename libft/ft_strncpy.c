@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:15:12 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 20:41:45 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/22 11:23:52 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	va_list			ap;
-	int				i;
-	t_conversion	*conv;
-	int				ret;
+	size_t i;
+	size_t src_len;
 
-	va_start(ap, format);
-	ret = 0;
 	i = 0;
-	while (format[i])
+	src_len = ft_strlen(src);
+	if (len <= src_len)
+		ft_memcpy(dst, src, len);
+	else
 	{
-		if (format[i] == '%')
+		ft_memcpy(dst, src, src_len);
+		i = src_len;
+		while (i < len)
 		{
-			conv = get_conversion(ap, format, &i);
-			handle_conversion(ap, &conv);
-			write(1, conv->out, conv->outlen);
-			ret += conv->outlen;
-		}
-		else
-		{
-			write(1, &format[i++], 1);
-			ret++;
+			dst[i] = '\0';
+			i++;
 		}
 	}
-	va_end(ap);
-	return (ret);
+	return (dst);
 }

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:52:10 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/25 20:33:50 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/27 17:22:46 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int a;
-	int b[2];
+	size_t	len1;
+	size_t	len2;
+	char	*res;
 
-	a = -2341;
-	/* printf("[%010.20l%]\n", 10, 7, 5); */
-	b[0] = ft_printf("My number is [%d]!\n", a);
-	b[1] = printf("My number is [%d]!\n", a);
-
-	ft_printf("res1 = %d\n", b[0]);
-	printf("{%d}\n", ft_printf("res2 = %d\n", b[1]));
-	return (0);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!res)
+		return (NULL);
+	ft_strncpy(res, s1, len1);
+	ft_strncpy(&res[len1], s2, len2);
+	res[len1 + len2] = '\0';
+	return (res);
 }

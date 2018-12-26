@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:52:10 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 19:29:52 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/30 17:25:44 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+size_t	ft_strlen(const char *s)
 {
-	int a;
-	int b[2];
+	size_t i;
 
-	a = -2341;
-	/* printf("[%010.20l%]\n", 10, 7, 5); */
-	b[0] = ft_printf("My number is [%d]!\n", a);
-	b[1] = printf("My number is [%d]!\n", a);
-
-	ft_printf("res1 = %d\n", b[0]);
-	printf("{%d}\n", ft_printf("res2 = %d\n", b[1]));
-	return (0);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

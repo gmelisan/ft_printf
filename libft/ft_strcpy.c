@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:52:10 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 20:20:13 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/21 20:29:27 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "ft_printf.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	int a;
-	int b[2];
+	size_t len;
 
-	a = -2341;
-	/* printf("[%010.20l%]\n", 10, 7, 5); */
-	b[0] = ft_printf("My number is [%d]!\n", a);
-	b[1] = printf("My number is [%d]!\n", a);
-
-	ft_printf("res1 = %d\n", b[0]);
-	printf("{%d}\n", ft_printf("res2 = %d\n", b[1]));
-	return (0);
+	len = ft_strlen(src);
+	ft_memcpy(dst, src, len);
+	dst[len] = '\0';
+	return (dst);
 }
