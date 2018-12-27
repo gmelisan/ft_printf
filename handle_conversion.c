@@ -6,25 +6,40 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:46:26 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/27 18:41:41 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	handle_conversion(va_list ap, t_conversion **pp_conv)
+static int	clear(t_conversion **conv)
 {
-	int arg;
-	t_conversion *conv;
+	int res;
 
-	conv = *pp_conv;
-	if (conv->type == '%')
-		write(1, &conv->type, 1);
-	else if (conv->type == 'd')
-	{
-		arg = va_arg(ap, int);
-		conv->out = ft_itoa(arg);
-		conv->outlen = ft_strlen(conv->out);
-	}
-	*pp_conv = conv;
+	res = ft_strlen((*conv)->out);
+	free(out);
+	ft_memdel(conv);
+}
+
+int			handle_conversion(va_list ap, t_conversion **conv)
+{
+	if ((*conv)->type == '%')
+		handle_percent(ap, *conv);
+	else if ((*conv)->type == 'd' ||  (*conv)->type == 'i')
+		handle_decimal(ap, *conv);
+	else if ((*conv)->type == 'u')
+		handle_unsigned(ap, *conv);
+	else if ((*conv)->type == 'o')
+		handle_octal(ap, *conv);
+	else if ((*conv)->type == 'x' || (*conv)->type == 'X')
+		handle_hexadecimal(ap, *conv);
+	else if ((*conv)->type == 'f' || (*conv)->type == 'F')
+		handle_float(ap, *conv);
+	else if ((*conv)->type == 'c')
+		handle_char(ap, *conv);
+	else if ((*conv)->type == 's')
+		handle_string(ap, *conv);
+	else if ((*conv)->type == 'p')
+		handle_pointer(ap, *conv);
+	return (clear(conv));
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:48:01 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/27 17:37:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct	s_conversion
 	t_uchar		length;
 	t_uchar		type;
 	char		*out;
-	int			outlen;
 }				t_conversion;
 
 int				ft_printf(const char *format, ...);
@@ -61,6 +60,6 @@ void			get_width(va_list ap, t_conversion *conv, const char *format, int *i);
 void			get_precision(va_list ap, t_conversion *conv, const char *format, int *i);
 void			get_length(t_conversion *conv, const char *format, int *i);
 void			get_type(t_conversion *conv, const char *format, int *i);
-void			handle_conversion(va_list ap, t_conversion **conv);
+int				handle_conversion(va_list ap, t_conversion **conv);
 
 #endif

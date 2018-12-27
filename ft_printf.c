@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:15:12 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/27 17:23:47 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int		ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			conv = get_conversion(ap, format, &i);
-			handle_conversion(ap, &conv);
-			write(1, conv->out, conv->outlen);
-			ret += conv->outlen;
+			ret += handle_conversion(ap, &conv);
 		}
 		else
 		{
