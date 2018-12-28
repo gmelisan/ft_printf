@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_conversion.c                                   :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 18:24:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:57:55 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/20 16:53:29 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/12/11 20:56:06 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-t_conversion	*get_conversion(va_list ap, const char *format, int *i)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_conversion *conv;
+	size_t i;
 
-	*i = *i + 1;
-	conv = ft_memalloc(sizeof(*conv));
-	get_flags(conv, format, i);
-	get_width(ap, conv, format, i);
-	get_precision(ap, conv, format, i);
-	get_length(conv, format, i);
-	get_type(conv, format, i);
-	return (conv);
+	i = 0;
+	while (i < n)
+	{
+		*((t_uchar *)dst + i) = *((t_uchar *)src + i);
+		i++;
+	}
+	return (dst);
 }

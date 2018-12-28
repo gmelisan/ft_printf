@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 19:16:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/26 21:14:40 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/28 19:58:05 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ void			get_flags(t_conversion *conv, const char *format, int *p_i)
 		if (format[i] == '#')
 			conv->flags.hash = 1;
 		if (format[i] == '0')
-			conv->flags.hash = 1;
+			conv->flags.zero = 1;
 		if (format[i] == '-')
-			conv->flags.hash = 1;
+			conv->flags.minus = 1;
 		if (format[i] == ' ')
-			conv->flags.hash = 1;
+			conv->flags.space = 1;
 		if (format[i] == '+')
-			conv->flags.hash = 1;
+			conv->flags.plus = 1;
 		if (format[i] == '\'')
-			conv->flags.hash = 1;
+			conv->flags.apos = 1;
 		i++;
 	}
 	*p_i = i;
@@ -74,6 +74,7 @@ void			get_precision(va_list ap, t_conversion *conv,
 	if (format[i] == '.')
 	{
 		i++;
+		conv->prec_set = 1;
 		if (format[i] == '*')
 		{
 			prec = va_arg(ap, int);

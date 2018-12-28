@@ -3,39 +3,38 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
+#    By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/25 15:49:12 by gmelisan          #+#    #+#              #
-#    Updated: 2018/12/28 20:25:34 by gmelisan         ###   ########.fr        #
+#    Created: 2018/12/28 16:40:09 by gmelisan          #+#    #+#              #
+#    Updated: 2018/12/28 21:30:25 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME = libftprintf.a
+NAME = run
+LIB = ../libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra #-Werror
-CFLAGS += -g
+#CFLAGS += -g
 
-OBJ = ft_printf.o get_conversion.o get_conv_func.o handle_conversion.o \
-handle_percent.o handle_decimal.o handle_unsigned.o handle_octal.o \
-handle_hexadecimal.o handle_float.o handle_char.o handle_string.o \
-handle_pointer.o
-
-OBJ += ft_isdigit.o ft_memalloc.o ft_memdel.o ft_bzero.o ft_putchar.o \
-ft_itoa.o ft_memset.o ft_strlen.o ft_strnew.o ft_strncpy.o ft_memcpy.o
+OBJ = main.o test_c.o test_s.o test_d.o
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@echo "\nFile \"$(NAME)\" was successfully created."
+$(NAME): $(OBJ) $(LIB)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L.. -lftprintf
+	@echo "Ready to ./run"
 
-$(OBJ): ft_printf.h
+$(OBJ): test.h
+
+$(LIB):
+	make -C ..
 
 clean:
 	@rm -f $(OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(LIB)
 
 re: fclean all

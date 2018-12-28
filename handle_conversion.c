@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/27 18:41:41 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/28 17:15:55 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ static int	clear(t_conversion **conv)
 	int res;
 
 	res = ft_strlen((*conv)->out);
-	free(out);
-	ft_memdel(conv);
+	free((*conv)->out);
+	ft_memdel((void **)conv);
+	return (res);
 }
 
 int			handle_conversion(va_list ap, t_conversion **conv)

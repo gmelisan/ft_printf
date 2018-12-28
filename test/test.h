@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_conversion.c                                   :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 18:24:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:57:55 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/12/28 16:44:51 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/12/28 19:37:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef TEST_H
+# define TEST_H
 
-t_conversion	*get_conversion(va_list ap, const char *format, int *i)
-{
-	t_conversion *conv;
+# include <stdio.h>
+# include <unistd.h>
 
-	*i = *i + 1;
-	conv = ft_memalloc(sizeof(*conv));
-	get_flags(conv, format, i);
-	get_width(ap, conv, format, i);
-	get_precision(ap, conv, format, i);
-	get_length(conv, format, i);
-	get_type(conv, format, i);
-	return (conv);
-}
+# include "../ft_printf.h"
+
+void	test_c(void);
+void	test_s(void);
+
+#endif

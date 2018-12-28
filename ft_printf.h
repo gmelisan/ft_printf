@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/27 17:37:55 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/28 19:57:02 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef unsigned int	t_uint;
 
 /*
 ** %[flags][width][.precision][length]type
+** prec_set = 1 if '.' exists
 */
 
 typedef struct	s_conversion
@@ -48,6 +49,7 @@ typedef struct	s_conversion
 	}			flags;
 	t_uint		width;
 	t_uint		precision;
+	t_uchar		prec_set;
 	t_uchar		length;
 	t_uchar		type;
 	char		*out;
@@ -61,5 +63,15 @@ void			get_precision(va_list ap, t_conversion *conv, const char *format, int *i)
 void			get_length(t_conversion *conv, const char *format, int *i);
 void			get_type(t_conversion *conv, const char *format, int *i);
 int				handle_conversion(va_list ap, t_conversion **conv);
+void			handle_percent(va_list ap, t_conversion *conv);
+void			handle_percent(va_list ap, t_conversion *conv);
+void			handle_decimal(va_list ap, t_conversion *conv);
+void			handle_unsigned(va_list ap, t_conversion *conv);
+void			handle_octal(va_list ap, t_conversion *conv);
+void			handle_hexadecimal(va_list ap, t_conversion *conv);
+void			handle_float(va_list ap, t_conversion *conv);
+void			handle_char(va_list ap, t_conversion *conv);
+void			handle_string(va_list ap, t_conversion *conv);
+void			handle_pointer(va_list ap, t_conversion *conv);
 
 #endif
