@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:57:02 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/11 23:43:30 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include <unistd.h>
 # include "libft.h"
 
-typedef unsigned char	t_uchar;
-typedef unsigned int	t_uint;
+typedef unsigned char			t_uchar;
+typedef unsigned int			t_uint;
+typedef long long int			t_llint;
+typedef unsigned long long int	t_ullint;
 
 /*
 ** ll, h, l, ll, L
@@ -73,5 +75,7 @@ void			handle_float(va_list ap, t_conversion *conv);
 void			handle_char(va_list ap, t_conversion *conv);
 void			handle_string(va_list ap, t_conversion *conv);
 void			handle_pointer(va_list ap, t_conversion *conv);
+void			prepare_out(t_conversion *conv, int len);
 
 #endif
+

@@ -6,7 +6,7 @@
 #    By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/28 16:40:09 by gmelisan          #+#    #+#              #
-#    Updated: 2018/12/28 21:30:25 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/03 22:32:04 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,7 @@ LIB = ../libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra #-Werror
-#CFLAGS += -g
+CFLAGS += -g
 
 OBJ = main.o test_c.o test_s.o test_d.o
 

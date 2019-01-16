@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:47:14 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 20:41:07 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/03 22:30:29 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,8 @@ void	test_c(void)
 	test_c_run("%4c", 'b');
 	test_c_run("%04c", 'b');
 	test_c_run("%-5c", 'c');
+	test_c_run("%c", 0);
+	test_c_run("%1c", 0);
+	test_c_run("%2c", 0);
+	test_c_run("%3c", 0);
 }

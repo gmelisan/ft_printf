@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 00:32:54 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/11/27 17:20:07 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/04 19:13:37 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void		ft_strrev(char *str)
 }
 
 char			*ft_itoa(int n)
-{
+		{
 	char	*res;
 	int		i;
 	t_uint	un;
