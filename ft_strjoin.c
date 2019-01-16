@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 20:01:21 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/25 20:33:50 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/27 17:22:46 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	va_list			ap;
-	int				i;
-	t_conversion	*conv;
-	int				ret;
+	size_t	len1;
+	size_t	len2;
+	char	*res;
 
-	va_start(ap, format);
-	ret = 0;
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			conv = get_conversion(ap, format, &i);
-			ret += handle_conversion(ap, &conv);
-		}
-		else
-		{
-			write(1, &format[i++], 1);
-			ret++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	res = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!res)
+		return (NULL);
+	ft_strncpy(res, s1, len1);
+	ft_strncpy(&res[len1], s2, len2);
+	res[len1 + len2] = '\0';
+	return (res);
 }

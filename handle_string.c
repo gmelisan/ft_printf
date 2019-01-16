@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:27:24 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/04 06:36:21 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:47:20 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handle_string(va_list ap, t_conversion *conv)
 	if (conv->precision < strsize && conv->prec_set)
 		strsize = conv->precision;
 	len = conv->width > strsize ? conv->width : strsize;
-	prepare_out(conv, len);
+	conv->out = prepare_out(conv, len);
 	if (conv->flags.minus)
 		ft_memcpy(conv->out, str, strsize);
 	else

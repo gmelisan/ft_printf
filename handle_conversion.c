@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/12 01:47:00 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 22:35:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ static int	clear(t_conversion **conv)
 	int res;
 
 	res = ft_strlen((*conv)->out);
-	free((*conv)->out);
+	ft_strdel(&(*conv)->out);
 	ft_memdel((void **)conv);
 	return (res);
 }
 
 int			handle_conversion(va_list ap, t_conversion **conv)
 {
-	if ((*conv)->type == '%')
-		handle_percent(ap, *conv);
-	else if ((*conv)->type == 'd' ||  (*conv)->type == 'i')
+	if ((*conv)->type == 'd' ||  (*conv)->type == 'i')
 		handle_decimal(ap, *conv);
 	else if ((*conv)->type == 'u')
 		handle_unsigned(ap, *conv);
@@ -42,5 +40,7 @@ int			handle_conversion(va_list ap, t_conversion **conv)
 		handle_string(ap, *conv);
 	else if ((*conv)->type == 'p')
 		handle_pointer(ap, *conv);
+	else
+		handle_unknown(*conv);
 	return (clear(conv));
 }

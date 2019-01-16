@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_c.c                                           :+:      :+:    :+:   */
+/*   test_unknown.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 16:47:14 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 21:17:44 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/16 20:40:39 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/16 22:06:28 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-void	test_c_run(char *format, char c)
+void	test_unknown_run(char *format, char *str)
 {
 	int r1, r2;
 
 	ft_putstr(format);
 	printf("\n[");
-	r1 = printf(format, c);
+	r1 = printf(format, str);
 	printf("] [");
-	r2 = ft_printf(format, c);
+	r2 = ft_printf(format, str);
 	printf("]\n%d %d\n\n", r1, r2);
 }
 
-void	test_c(void)
+void	test_unknown(void)
 {
 	printf("============================\n");
-	printf("========== test_c ==========\n");
+	printf("========== test_%% ==========\n");
 	printf("============================\n");
-	printf("*note: all flags except of '-' have undefined behavior\n");
-	printf("precision has undefined behavior\n\n");
+	printf("*note: any unknown type is like %%\n");
 	printf("[printf] [ft_printf]\n");
 	printf("ret ft_ret\n\n");
 
-	test_c_run("%c", 'a');
-	test_c_run("%4c", 'b');
-	test_c_run("%04c", 'b');
-	test_c_run("%-5c", 'c');
-	test_c_run("%c", 0);
-	test_c_run("%1c", 0);
-	test_c_run("%3c", 0);
-	test_c_run("%-3c", 0);
+	test_unknown_run("%%", "");
+	test_unknown_run("Le percento:%4%", "");
+	test_unknown_run("Le percento:%-4%", "");
+	
+	test_unknown_run("%10w", "");
+	test_unknown_run("%04k", "");
+	test_unknown_run("%-4k", "");
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/14 17:40:02 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:58:18 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@ t_llint	pullarg_decimal(va_list ap, t_uchar length)
 	if (length == L_LL)
 		return (long long int)va_arg(ap, long long int);
 	return (int)va_arg(ap, int);
+}
+
+int		explicit_precision_zero(t_conversion *conv)
+{
+	if (conv->prec_set == 1 && conv->precision == 0)
+	{
+		conv->out = ft_strnew(0);
+		return (1);
+	}
+	return (0);
 }
 
 t_uint	count_digits(t_llint n)
@@ -72,28 +82,68 @@ void	number_to_string(t_llint n, char **str)
 void	add_zeros(char **str, t_conversion *conv)
 {
 	char	*newstr;
-	size_t	;
+	int		len;
+	int		newlen;
 
-	if (!conv->prec_set && conv->flags.zero)
+	len = ft_strlen(*str);
+	newlen = conv->precision;
+	if (newlen > len)
 	{
-		len =
-			
-		newstr = ft_strnew();
+		newstr = ft_strnew(newlen);
+		ft_memset(newstr, '0', newlen);
+		ft_memcpy(newstr + (newlen - len), *str, len);
+		ft_strdel(str);
+		*str = newstr;
 	}
 }
 
-void	add_sign_spaces(char **str, t_conversion *conv)
-{}
-
-int		explicit_precision_zero(t_conversion *conv)
+void	add_sign(char **str, t_conversion *conv, t_llint n)
 {
-	if (conv->prec_set == 1 && conv->precision == 0)
+	char *newstr;
+
+	newstr = NULL;
+	if (n < 0)
+		newstr = ft_strjoin("-", *str);
+	else if (conv->flags.plus)
+		newstr = ft_strjoin("+", *str);
+	else if (conv->flags.space)
+		newstr = ft_strjoin(" ", *str);
+	if (n < 0 || conv->flags.plus || conv->flags.space)
 	{
-		conv->out = ft_strnew(0);
-		return (1);
+		ft_strdel(str);
+		*str = newstr;
 	}
-	return (0);
 }
+
+void	add_spaces(char **str, t_conversion *conv)
+{
+	char	*newstr;
+	int		len;
+	int		newlen;
+
+	len = ft_strlen(*str);
+	newlen = conv->width;
+	if (newlen > len)
+	{
+		newstr = prepare_out(conv, newlen);
+		if (conv->flags.minus)
+			ft_memcpy(newstr, *str, len);
+		else
+			ft_memcpy(newstr + (newlen - len), *str, len);
+		ft_strdel(str);
+		*str = newstr;
+	}
+}
+/*
+** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+** %0 5d, -42
+** [-0042] [00-42]
+** 5 5
+
+** %0+ 5d, 42
+** [+0042] [00+42]
+** 5 5
+*/
 
 void	handle_decimal(va_list ap, t_conversion *conv)
 {
@@ -106,69 +156,71 @@ void	handle_decimal(va_list ap, t_conversion *conv)
 	str = NULL;
 	number_to_string(n, &str);
 	add_zeros(&str, conv);
-	add_sign_spaces(&str, conv);
+	add_sign(&str, conv, n);
+	add_spaces(&str, conv);
+	conv->out = str;
 	write(1, conv->out, ft_strlen(conv->out));
 }
 
-char	*create_number_string(t_conversion *conv, t_llint n)
-{
-	char	*str;
-	t_uint	digits;
-	int		len;
-	t_ullint un;
-	int		i;
+/* char	*create_number_string(t_conversion *conv, t_llint n) */
+/* { */
+/* 	char	*str; */
+/* 	t_uint	digits; */
+/* 	int		len; */
+/* 	t_ullint un; */
+/* 	int		i; */
 
-	digits = count_digits(n);
-	len = (conv->precision > digits) ? conv->precision : digits;
-	if (conv->flags.plus || conv->flags.space || n < 0)
-		len++;
-	str = ft_strnew(len);
-	ft_memset(str, '0', len - 1);
-	if (n == 0)
-		return (str);
-	un = absolute_value(n);
-	if (n < 0)
-		str[0] = '-';
-	else if (conv->flags.plus)
-		str[0] = '+';
-	else if (conv->flags.space && !conv->flags.plus)
-		str[0] = ' ';
-	i = len - 1;
-	while (un)
-	{
-		str[i] = (un % 10) + '0';
-		un = un / 10;
-		i--;
-	}
-	return (str);
-}
+/* 	digits = count_digits(n); */
+/* 	len = (conv->precision > digits) ? conv->precision : digits; */
+/* 	if (conv->flags.plus || conv->flags.space || n < 0) */
+/* 		len++; */
+/* 	str = ft_strnew(len); */
+/* 	ft_memset(str, '0', len - 1); */
+/* 	if (n == 0) */
+/* 		return (str); */
+/* 	un = absolute_value(n); */
+/* 	if (n < 0) */
+/* 		str[0] = '-'; */
+/* 	else if (conv->flags.plus) */
+/* 		str[0] = '+'; */
+/* 	else if (conv->flags.space && !conv->flags.plus) */
+/* 		str[0] = ' '; */
+/* 	i = len - 1; */
+/* 	while (un) */
+/* 	{ */
+/* 		str[i] = (un % 10) + '0'; */
+/* 		un = un / 10; */
+/* 		i--; */
+/* 	} */
+/* 	return (str); */
+/* } */
 
-void	handle_decimal(va_list ap, t_conversion *conv)
-{
-	t_llint		n;
-	int			len;
-	char		*str;
-	size_t		strsize;
+/* void	handle_decimal(va_list ap, t_conversion *conv) */
+/* { */
+/* 	t_llint		n; */
+/* 	int			len; */
+/* 	char		*str; */
+/* 	size_t		strsize; */
 
-	n = pullarg_decimal(ap, conv->length);
-	if (n == 0 && handle_decimal_zero(conv))
-		return ;
-	str = create_number_string(conv, n);
-	strsize = ft_strlen(str);
-	len = (strsize > conv->width) ? strsize : conv->width;
-	if (conv->prec_set && conv->flags.zero)
-		conv->flags.zero = 0;
-	conv->out = ft_strnew(len);
-	if (conv->flags.minus)
-		conv->flags.zero = 0;
-	if (conv->flags.zero)
-		ft_memset(conv->out, '0', len);
-	else
-		ft_memset(conv->out, ' ', len);
-	if (conv->flags.minus)
-		ft_memcpy(conv->out, str, strsize);
-	else
-		ft_memcpy(conv->out + (len - strsize), str, strsize);
-	free(str);
-	write(1, conv->out, len);
-}
+/* 	n = pullarg_decimal(ap, conv->length); */
+/* 	if (n == 0 && explicit_precision_zero(conv)) */
+/* 		return ; */
+/* 	str = create_number_string(conv, n); */
+/* 	strsize = ft_strlen(str); */
+/* 	len = (strsize > conv->width) ? strsize : conv->width; */
+/* 	if (conv->prec_set && conv->flags.zero) */
+/* 		conv->flags.zero = 0; */
+/* 	conv->out = ft_strnew(len); */
+/* 	if (conv->flags.minus) */
+/* 		conv->flags.zero = 0; */
+/* 	if (conv->flags.zero) */
+/* 		ft_memset(conv->out, '0', len); */
+/* 	else */
+/* 		ft_memset(conv->out, ' ', len); */
+/* 	if (conv->flags.minus) */
+/* 		ft_memcpy(conv->out, str, strsize); */
+/* 	else */
+/* 		ft_memcpy(conv->out + (len - strsize), str, strsize); */
+/* 	free(str); */
+/* 	write(1, conv->out, len); */
+/* } */

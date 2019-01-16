@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/25 15:49:12 by gmelisan          #+#    #+#              #
-#    Updated: 2018/12/28 20:25:34 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/16 23:48:35 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,12 +17,13 @@ CFLAGS = -Wall -Wextra #-Werror
 CFLAGS += -g
 
 OBJ = ft_printf.o get_conversion.o get_conv_func.o handle_conversion.o \
-handle_percent.o handle_decimal.o handle_unsigned.o handle_octal.o \
+handle_unknown.o handle_decimal.o handle_unsigned.o handle_octal.o \
 handle_hexadecimal.o handle_float.o handle_char.o handle_string.o \
-handle_pointer.o
+handle_pointer.o 
 
-OBJ += ft_isdigit.o ft_memalloc.o ft_memdel.o ft_bzero.o ft_putchar.o \
-ft_itoa.o ft_memset.o ft_strlen.o ft_strnew.o ft_strncpy.o ft_memcpy.o
+OBJ += ft_isdigit.o ft_memalloc.o ft_memdel.o ft_strdel.o ft_bzero.o \
+ft_putchar.o ft_itoa.o ft_memset.o ft_strlen.o ft_strnew.o ft_strncpy.o \
+ft_memcpy.o ft_putstr.o ft_strjoin.o
 
 all: $(NAME)
 

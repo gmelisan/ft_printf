@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_percent.c                                   :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 16:22:52 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:01:40 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/23 19:10:35 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/12/20 11:24:10 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
 
-void	handle_percent(va_list ap, t_conversion *conv)
+void	ft_strdel(char **as)
 {
-	if (!ap)
-		conv = NULL;
+	if (as && *as)
+	{
+		free(*as);
+		*as = NULL;
+	}
 }

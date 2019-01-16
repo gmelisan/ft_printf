@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 18:49:39 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/03 22:18:20 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 21:21:17 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 
 void	test_s_run(char *format, char *str)
 {
-	char f[100];
 	int r1, r2;
 
-	bzero(f, 100);
-	f[0] = '%';
-	memcpy(f + 1, format, strlen(format));
-	printf(f, str);
+	ft_putstr(format);
 	printf("\n[");
 	r1 = printf(format, str);
 	printf("] [");
@@ -36,7 +32,7 @@ void	test_s(void)
 	printf("*note: all flags except of '-' have undefined behavior\n");
 	printf("precision cuts the string\n\n");
 	printf("[printf] [ft_printf]\n");
-	printf("ret ft_ret\n\n");	
+	printf("ret ft_ret\n\n");
 
 	test_s_run("%s", "Hello, world!");
 	test_s_run("%010s", "hello");
@@ -44,8 +40,10 @@ void	test_s(void)
 	test_s_run("%5.4s", "darkness");
 	test_s_run("%-10s", "my");
 	test_s_run("%3.10s", "old");
+	test_s_run("%.10 3s", "old");
 	test_s_run("%1.100s", "friend");
 	test_s_run("%0.0s", "friend");
 	test_s_run("%0.s", "friend");
 	test_s_run("%s", "");
+	test_s_run("%10w...%s", "unknown_test");
 }

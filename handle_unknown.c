@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_char.c                                      :+:      :+:    :+:   */
+/*   handle_unknown.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 16:26:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 23:46:43 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/16 20:23:15 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/16 23:47:35 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*prepare_out(t_conversion *conv, int len)
+void	handle_unknown(t_conversion *conv)
 {
-	char *out;
-
-	out = ft_strnew(len);
-	if (conv->flags.minus)
-		conv->flags.zero = 0;
-	if (conv->flags.zero)
-		ft_memset(out, '0', len);
-	else
-		ft_memset(out, ' ', len);
-	return (out);
-}
-
-void	handle_char(va_list ap, t_conversion *conv)
-{
-	int len;
-	char c;
+	int		len;
+	char	c;
 
 	len = conv->width ? conv->width : 1;
-	c = (char)va_arg(ap, int);
+	c = conv->type;
 	conv->out = prepare_out(conv, len);
 	if (conv->flags.minus)
 		conv->out[0] = c;
@@ -40,5 +26,8 @@ void	handle_char(va_list ap, t_conversion *conv)
 		conv->out[len - 1] = c;
 	write(1, conv->out, len);
 	if (!c)
+	{
 		ft_memset(conv->out, '0', len);
+		conv->out[len - 1] = 0;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:44:51 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/30 12:46:45 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 20:48:49 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 # include "../ft_printf.h"
 
+void	test_unknown(void);
 void	test_c(void);
 void	test_s(void);
 void	test_d(void);

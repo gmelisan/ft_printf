@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 20:48:53 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/04 20:06:50 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:53:11 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void	test_d_run(char *format, long long int n)
 {
-	char f[100];
 	int r1;
 	int r2 = 0;
 
-	bzero(f, 100);
-	f[0] = '%';
-	memcpy(f + 1, format, strlen(format));
-	printf(f, n);
+	ft_putstr(format);
 	printf(", %lld\n[", n);
 	r1 = printf(format, n);
 	printf("] [");
@@ -43,8 +39,8 @@ void	test_d(void)
 	printf("[printf] [ft_printf]\n");
 	printf("ret ft_ret\n\n");
 
-	test_d_run("%1.1d", 42);
 	test_d_run("%d", 42);
+	test_d_run("%1.1d", 42);
 	test_d_run("% d", 42);
 	test_d_run("%+d", 42);
 	test_d_run("%5d", 42);
@@ -53,6 +49,7 @@ void	test_d(void)
 	test_d_run("%-5d", 42);
 	test_d_run("% -5d", 42);
 	test_d_run("% -5d", 42);
+	test_d_run("%d", 42);
 	test_d_run("%05d", 42);
 	test_d_run("%0 5d", -42);
 	test_d_run("%0+ 5d", 42);
@@ -60,21 +57,23 @@ void	test_d(void)
 	test_d_run("%-10.5d", -123);
 	test_d_run("%-+10d", 123);
 	test_d_run("%05d", 14);
-	/* test_d_run("%5.0d", 42); */
-	/* test_d_run("%5.2d", 42); */
-	/* test_d_run("%5.5d", 42); */
-	/* test_d_run("%10.5d", 42); */
-	/* test_d_run("%+10.5d", 42); */
-	/* test_d_run("%-10.5d", 42); */
-	/* test_d_run("%+-10.5d", 42); */
-	/* test_d_run("% -10.5d", 42); */
-	/* test_d_run("%+-10.5d", 0); */
-	/* test_d_run("%-10.5d", 0); */
-	/* test_d_run("%.0d", 0); */
-	/* test_d_run("%hhd", 257); */
-	/* test_d_run("%hd", 65537); */
-	/* test_d_run("%d", 4294967297); */
-	/* test_d_run("%ld", 4294967298); */
-	/* test_d_run("%lld", 1234567890123456789); */
-	/* test_d_run("%lld", 12345678901234567890); */
+	test_d_run("%6.4d", -123);
+
+	test_d_run("%5.0d", 42);
+	test_d_run("%5.2d", 42);
+	test_d_run("%5.5d", 42);
+	test_d_run("%10.5d", 42);
+	test_d_run("%+10.5d", 42);
+	test_d_run("%-10.5d", 42);
+	test_d_run("%+-10.5d", 42);
+	test_d_run("% -10.5d", 42);
+	test_d_run("%+-10.5d", 0);
+	test_d_run("%-10.5d", 0);
+	test_d_run("%.0d", 0);
+	test_d_run("%hhd", 257);
+	test_d_run("%hd", 65537);
+	test_d_run("%d", 4294967297);
+	test_d_run("%ld", 4294967298);
+	test_d_run("%lld", 1234567890123456789);
+	test_d_run("%lld", 12345678901234567890);
 }

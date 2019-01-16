@@ -6,7 +6,7 @@
 #    By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/28 16:40:09 by gmelisan          #+#    #+#              #
-#    Updated: 2019/01/03 22:32:04 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/16 20:48:09 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra #-Werror
 CFLAGS += -g
 
-OBJ = main.o test_c.o test_s.o test_d.o
+OBJ = main.o test_c.o test_s.o test_d.o test_f.o test_unknown.o
 
 all: $(NAME)
 

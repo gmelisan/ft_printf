@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 19:16:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/03 23:24:12 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/16 22:19:28 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,28 @@ void			get_precision(va_list ap, t_conversion *conv,
 	*p_i = i;
 }
 
+enum e_length	check_length(t_conversion *conv, enum e_length l)
+{
+	if (l > conv->length)
+		return (l);
+	return (conv->length);
+}
+
 void			get_length(t_conversion *conv, const char *format, int *p_i)
 {
 	int i;
 
 	i = *p_i;
 	if (format[i] == 'L')
-		conv->length = L_LB;
+		conv->length = check_length(conv, L_LB);
 	else if (format[i] == 'h' && format[i + 1] != 'h')
-		conv->length = L_H;
+		conv->length = check_length(conv, L_H);
 	else if (format[i] == 'h' && format[i + 1] == 'h')
-		conv->length = L_HH;
+		conv->length = check_length(conv, L_HH);
 	else if (format[i] == 'l' && format[i + 1] != 'l')
-		conv->length = L_L;
+		conv->length = check_length(conv, L_L);
 	else if (format[i] == 'l' && format[i + 1] == 'l')
-		conv->length = L_LL;
+		conv->length = check_length(conv, L_LL);
 	if (conv->length == L_HH || conv->length == L_LL)
 		i += 2;
 	else if (conv->length == L_LB || conv->length == L_H ||
