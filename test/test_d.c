@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 20:48:53 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 23:53:11 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 04:01:11 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void	test_d(void)
 	test_d_run("%05d", 42);
 	test_d_run("%0 5d", -42);
 	test_d_run("%0+ 5d", 42);
+	test_d_run("%0 5d", 42);
+	test_d_run("%-0 5d", 42);
 	test_d_run("%10.5d", -123);
 	test_d_run("%-10.5d", -123);
 	test_d_run("%-+10d", 123);
-	test_d_run("%05d", 14);
+	test_d_run("%05.3d", 14);
 	test_d_run("%6.4d", -123);
 
 	test_d_run("%5.0d", 42);
