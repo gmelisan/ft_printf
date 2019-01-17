@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 17:26:18 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:28:13 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		main(void)
 	/* test_c(); */
 	test_s();
 	test_d();
-	test_u();
+	/* test_u(); */
 	/* test_f(); */
 	
 	return (0);

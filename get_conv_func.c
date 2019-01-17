@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 19:16:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 22:19:28 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:44:05 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,20 @@ void			get_flags(t_conversion *conv, const char *format, int *p_i)
 {
 	int i;
 
-	i = *p_i;
-	while (format[i] == '#' || format[i] == '0' || format[i] == '-' ||
-			format[i] == ' ' || format[i] == '+' || format[i] == '\'') 
-	{
-		if (format[i] == '#')
-			conv->flags.hash = 1;
-		if (format[i] == '0')
-			conv->flags.zero = 1;
-		if (format[i] == '-')
-			conv->flags.minus = 1;
-		if (format[i] == ' ')
-			conv->flags.space = 1;
-		if (format[i] == '+')
-			conv->flags.plus = 1;
-		if (format[i] == '\'')
-			conv->flags.apos = 1;
-		i++;
-	}
+	i = *p_i;	
+	if (format[i] == '#')
+		conv->flags.hash = 1;
+	if (format[i] == '0')
+		conv->flags.zero = 1;
+	if (format[i] == '-')
+		conv->flags.minus = 1;
+	if (format[i] == ' ')
+		conv->flags.space = 1;
+	if (format[i] == '+')
+		conv->flags.plus = 1;
+	if (format[i] == '\'')
+		conv->flags.apos = 1;
+	i++;
 	*p_i = i;
 }
 
@@ -44,6 +40,7 @@ void			get_width(va_list ap, t_conversion *conv,
 	int width;
 
 	i = *p_i;
+	conv->width = 0;
 	if (format[i] == '*')
 	{
 		width = va_arg(ap, int);
@@ -75,6 +72,7 @@ void			get_precision(va_list ap, t_conversion *conv,
 	{
 		i++;
 		conv->prec_set = 1;
+		conv->precision = 0;
 		if (format[i] == '*')
 		{
 			prec = va_arg(ap, int);
