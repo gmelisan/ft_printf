@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 18:49:39 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 21:21:17 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:28:39 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ void	test_s(void)
 	test_s_run("%0.s", "friend");
 	test_s_run("%s", "");
 	test_s_run("%10w...%s", "unknown_test");
+	test_s_run("%s", NULL);
+	test_s_run("%10s", NULL);
+
+	test_s_run("%10s", NULL);
+	ft_printf("99999%ls\n", "a");
+	
 }

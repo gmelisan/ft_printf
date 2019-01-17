@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 22:35:45 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 14:49:27 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ static int	clear(t_conversion **conv)
 	return (res);
 }
 
+int			is_integer(t_uchar c)
+{
+	if (c == 'd' || c == 'D' || c == 'i' ||
+		c == 'u' || c == 'U' ||
+		c == 'o' || c == 'O' ||
+		c == 'x' || c == 'X')
+		return (1);
+	return (0);
+}
+
 int			handle_conversion(va_list ap, t_conversion **conv)
 {
-	if ((*conv)->type == 'd' ||  (*conv)->type == 'i')
-		handle_decimal(ap, *conv);
-	else if ((*conv)->type == 'u')
-		handle_unsigned(ap, *conv);
-	else if ((*conv)->type == 'o')
-		handle_octal(ap, *conv);
-	else if ((*conv)->type == 'x' || (*conv)->type == 'X')
-		handle_hexadecimal(ap, *conv);
+	if (is_integer((*conv)->type))
+		handle_integer(ap, *conv);
 	else if ((*conv)->type == 'f' || (*conv)->type == 'F')
 		handle_float(ap, *conv);
 	else if ((*conv)->type == 'c')

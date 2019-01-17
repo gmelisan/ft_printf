@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 23:47:04 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 15:45:34 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef unsigned char			t_uchar;
 typedef unsigned int			t_uint;
+typedef unsigned long int		t_ulint;
 typedef long long int			t_llint;
 typedef unsigned long long int	t_ullint;
 
@@ -64,8 +65,8 @@ void			get_length(t_conversion *conv, const char *format, int *i);
 void			get_type(t_conversion *conv, const char *format, int *i);
 int				handle_conversion(va_list ap, t_conversion **conv);
 void			handle_unknown(t_conversion *conv);
-void			handle_decimal(va_list ap, t_conversion *conv);
-void			handle_unsigned(va_list ap, t_conversion *conv);
+void			handle_integer(va_list ap, t_conversion *conv);
+void			handle_decimal(t_conversion *conv, t_llint n, int flag_unsigned);
 void			handle_octal(va_list ap, t_conversion *conv);
 void			handle_hexadecimal(va_list ap, t_conversion *conv);
 void			handle_float(va_list ap, t_conversion *conv);

@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 17:58:51 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 19:56:00 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/22 11:23:23 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int		ft_printf(const char *format, ...)
+char	*ft_strdup(const char *s1)
 {
-	va_list			ap;
-	int				i;
-	t_conversion	*conv;
-	int				ret;
+	char	*copy;
+	size_t	len;
 
-	va_start(ap, format);
-	ret = 0;
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			conv = get_conversion(ap, format, &i);
-			ret += handle_conversion(ap, &conv);
-		}
-		else
-		{
-			write(1, &format[i++], 1);
-			ret++;
-		}
-	}
-	va_end(ap);
-	return (ret);
+	len = ft_strlen(s1);
+	copy = (char *)malloc(len + 1);
+	if (!copy)
+		return (NULL);
+	ft_memcpy(copy, s1, len);
+	copy[len] = '\0';
+	return (copy);
 }
