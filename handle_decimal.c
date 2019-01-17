@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 04:18:01 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 05:06:09 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	number_to_string(t_llint n, char **str)
 	*str = ft_strnew(digits);
 	un = absolute_value(n);
 	i = digits - 1;
+	if (un == 0)
+		(*str)[i] = '0';
 	while (un)
 	{
 		(*str)[i] = (un % 10) + '0';
@@ -82,11 +84,11 @@ void	number_to_string(t_llint n, char **str)
 void	add_zeros(char **str, t_conversion *conv)
 {
 	char	*newstr;
-	int		len;
-	int		newlen;
+	size_t	len;
+	size_t	newlen;
 
 	len = ft_strlen(*str);
-	if (conv->prec_set)
+	if (conv->flags.minus || conv->prec_set)
 		conv->flags.zero = 0;
 	if (conv->flags.zero && conv->width > len)
 		newlen = conv->width - 1;
