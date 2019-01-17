@@ -6,18 +6,18 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 16:50:46 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 20:13:44 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_uint		count_digits(t_ullint n)
+t_uint		count_digits(t_ullint n, int base)
 {
 	t_uint res;
 
 	res = 1;
-	while ((n = n / 10))
+	while ((n = n / base))
 		res++;
 	return (res);
 }
@@ -37,28 +37,61 @@ t_ullint	absolute_value(t_llint n)
 	return (un);
 }
 
+char	int2char(int n, int flag_bigsym)
+{
+	if (n > 9)
+		return (n - 10 + (flag_bigsym ? 'A' : 'a'));
+	return (n + '0');
+}
 
-void	number_to_string(t_llint n, char **str, int flag_unsigned)
+
+int		get_base(char c)
+{
+	if (c == 'x' || c == 'X')
+		return (16);
+	if (c == 'o' || c == 'O')
+		return (8);
+	if (c == 'b')
+		return (2);
+	return (10);
+}
+
+char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
 {
 	t_uint		digits;
 	int			i;
 	t_ullint	un;
+	int			base;
+	char		*str;
 
 	un = flag_unsigned ? (t_ullint)n : absolute_value(n);
-	digits = count_digits(un);
-	*str = ft_strnew(digits);
+	base = get_base(conv->type);
+	digits = count_digits(un, base);
+	str = ft_strnew(digits);
 	i = digits - 1;
 	if (un == 0)
-		(*str)[i] = '0';
+		str[i] = '0';
 	while (un)
 	{
-		(*str)[i] = (un % 10) + '0';
-		un = un / 10;
+		str[i] = int2char(un % base, (conv->type == 'X' ? 1 : 0));
+		un = un / base;
 		i--;
 	}
+	return (str);
 }
 
-void	add_zeros(char **str, t_conversion *conv)
+int		calc_sign_space(t_conversion *conv, t_llint n)
+{
+	if (n < 0 || conv->flags.plus || conv->flags.space)
+		return (1);
+	if (get_base(conv->type) == 8)
+		return (1);
+	if (get_base(conv->type) == 16 && n != 0)
+		return (2);
+	return (0);
+}
+
+void	add_zeros(char **str, t_conversion *conv, t_llint n)
 {
 	char	*newstr;
 	size_t	len;
@@ -68,7 +101,7 @@ void	add_zeros(char **str, t_conversion *conv)
 	if (conv->flags.minus || conv->prec_set)
 		conv->flags.zero = 0;
 	if (conv->flags.zero && conv->width > len)
-		newlen = conv->width - 1;
+		newlen = conv->width - calc_sign_space(conv, n);
 	else
 		newlen = conv->precision;
 	if (newlen > len)
@@ -99,6 +132,25 @@ void	add_sign(char **str, t_conversion *conv, t_llint n)
 	}
 }
 
+void	add_altform(char **str, t_conversion *conv, t_llint n)
+{
+	char *newstr;
+
+	newstr = NULL;
+	if (get_base(conv->type) == 8)
+	{
+		newstr = ft_strjoin("0", *str);
+		ft_strdel(str);
+		*str = newstr;
+	}
+	if (get_base(conv->type) == 16 && n != 0)
+	{
+		newstr = ft_strjoin((conv->type == 'X' ? "0X" : "0x"), *str);
+		ft_strdel(str);
+		*str = newstr;
+	}
+}
+
 void	add_spaces(char **str, t_conversion *conv)
 {
 	char	*newstr;
@@ -119,19 +171,22 @@ void	add_spaces(char **str, t_conversion *conv)
 	}
 }
 
-void	handle_decimal(t_conversion *conv, t_llint n, int flag_unsigned)
+char	*create_integer_out(t_conversion *conv, t_llint n)
 {
 	char	*str;
+	int		flag_unsigned;
 
 	str = NULL;
+	flag_unsigned = (conv->type == 'd' || conv->type == 'i') ? 0 : 1;
 	if (n == 0 && conv->prec_set && conv->precision == 0)
 		str = ft_strnew(0);
 	else
-		number_to_string(n, &str, flag_unsigned);
-	add_zeros(&str, conv);
+		str = number_to_string(n, conv, flag_unsigned);
+	add_zeros(&str, conv, n);
 	if (!flag_unsigned)
 		add_sign(&str, conv, n);
+	if (conv->flags.hash)
+		add_altform(&str, conv, n);
 	add_spaces(&str, conv);
-	conv->out = str;
-	write(1, conv->out, ft_strlen(conv->out));
+	return (str);
 }

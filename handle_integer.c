@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 17:54:25 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 19:11:39 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ void	handle_integer(va_list ap, t_conversion *conv)
 		n = pullarg_integer(ap, conv->length);
 	else
 		n = pullarg_unsigned(ap, conv->length);
-	if (conv->type == 'd' || conv->type == 'i')
-		handle_decimal(conv, n, 0);
-	else if (conv->type == 'u')
-		handle_decimal(conv, n, 1);
-	else if (conv->type == 'o')
-		handle_octal(ap, conv);
-	else if (conv->type == 'x' || conv->type == 'X')
-		handle_hexadecimal(ap, conv);
+	conv->out = create_integer_out(conv, n);
+	write(1, conv->out, ft_strlen(conv->out));
 }
