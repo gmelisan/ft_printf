@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 04:01:32 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/17 04:18:01 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ void	add_zeros(char **str, t_conversion *conv)
 	int		newlen;
 
 	len = ft_strlen(*str);
-	newlen = conv->precision;
+	if (conv->prec_set)
+		conv->flags.zero = 0;
+	if (conv->flags.zero && conv->width > len)
+		newlen = conv->width - 1;
+	else
+		newlen = conv->precision;
 	if (newlen > len)
 	{
 		newstr = ft_strnew(newlen);
@@ -123,8 +128,6 @@ void	add_spaces(char **str, t_conversion *conv)
 
 	len = ft_strlen(*str);
 	newlen = conv->width;
-	if (conv->prec_set)
-		conv->flags.zero = 0;
 	if (newlen > len)
 	{
 		newstr = prepare_out(conv, newlen);
@@ -136,17 +139,6 @@ void	add_spaces(char **str, t_conversion *conv)
 		*str = newstr;
 	}
 }
-/*
-** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-** %0 5d, -42
-** [-0042] [00-42]
-** 5 5
-
-** %0+ 5d, 42
-** [+0042] [00+42]
-** 5 5
-**
-*/
 
 void	handle_decimal(va_list ap, t_conversion *conv)
 {
