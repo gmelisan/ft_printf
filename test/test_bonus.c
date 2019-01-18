@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:59:08 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/18 21:57:08 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/18 22:06:24 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-int		main(void)
+void	test_bonus_run(char *format, t_llint n)
 {
-	setbuf(stdout, NULL);
-	/* test_unknown(); */
-	/* test_c(); */
-	/* test_s(); */
-	/* test_d(); */
-	/* test_u(); */
-	/* test_o(); */
-	/* test_x(); */
-	/* test_f(); */
-	test_bonus();
+	int r;
 
-	return (0);
+	ft_putstr(format);
+	printf(", %lld\n[", n);
+	r = ft_printf(format, n);
+	printf("]\n%d\n\n", r);
+}
+
+void	test_bonus(void)
+{
+	printf("============================\n");
+	printf("========= test_bunus =======\n");
+	printf("============================\n\n");
+
+	test_bonus_run("%b", 666);
+	test_bonus_run("%14.11#b", 666);
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 19:16:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 18:44:05 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:54:47 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void			get_flags(t_conversion *conv, const char *format, int *p_i)
 		conv->flags.space = 1;
 	if (format[i] == '+')
 		conv->flags.plus = 1;
-	if (format[i] == '\'')
-		conv->flags.apos = 1;
 	i++;
 	*p_i = i;
 }

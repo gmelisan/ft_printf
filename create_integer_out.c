@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:34:10 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 22:05:02 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	add_sign(char **str, t_conversion *conv, t_llint n)
 		newstr = ft_strjoin("+", *str);
 	else if (conv->flags.space)
 		newstr = ft_strjoin(" ", *str);
-	if (n < 0 || conv->flags.plus || conv->flags.space)
+	if (newstr)
 	{
 		ft_strdel(str);
 		*str = newstr;
@@ -134,14 +134,13 @@ void	add_altform(char **str, t_conversion *conv, t_llint n)
 
 	newstr = NULL;
 	if (get_base(conv->type) == 8 && (*str)[0] != '0')
-	{
 		newstr = ft_strjoin("0", *str);
-		ft_strdel(str);
-		*str = newstr;
-	}
-	if (get_base(conv->type) == 16 && n != 0)
-	{
+	else if (get_base(conv->type) == 16 && n != 0)
 		newstr = ft_strjoin((conv->type == 'X' ? "0X" : "0x"), *str);
+	else if (get_base(conv->type) == 2 && n != 0)
+		newstr = ft_strjoin("0b", *str);
+	if (newstr)
+	{
 		ft_strdel(str);
 		*str = newstr;
 	}
