@@ -6,22 +6,11 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 19:11:39 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:04:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-/* 
-		add to libft: tolower, toupper
-*/
-
-int		ft_tolower(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
-}
 
 t_llint	pullarg_integer(va_list ap, t_uchar length)
 {

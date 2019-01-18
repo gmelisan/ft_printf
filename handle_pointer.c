@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:27:39 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:04:17 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 20:07:31 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	handle_pointer(va_list ap, t_conversion *conv)
 {
-	if (!ap)
+	if (!ap && conv)
 		conv = NULL;
 }

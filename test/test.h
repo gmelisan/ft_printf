@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:44:51 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 15:52:19 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:15:22 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ void	test_c(void);
 void	test_s(void);
 void	test_d(void);
 void	test_u(void);
+void	test_o(void);
+void	test_x(void);
+
 
 #endif

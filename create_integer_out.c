@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_decimal.c                                   :+:      :+:    :+:   */
+/*   create_integer_out.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/17 20:13:44 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 21:34:10 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,11 @@ char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
 	return (str);
 }
 
-int		calc_sign_space(t_conversion *conv, t_llint n)
+int		get_sign_space(t_conversion *conv, t_llint n)
 {
-	if (n < 0 || conv->flags.plus || conv->flags.space)
-		return (1);
-	if (get_base(conv->type) == 8)
-		return (1);
 	if (get_base(conv->type) == 16 && n != 0)
 		return (2);
-	return (0);
+	return (1);
 }
 
 void	add_zeros(char **str, t_conversion *conv, t_llint n)
@@ -101,7 +97,7 @@ void	add_zeros(char **str, t_conversion *conv, t_llint n)
 	if (conv->flags.minus || conv->prec_set)
 		conv->flags.zero = 0;
 	if (conv->flags.zero && conv->width > len)
-		newlen = conv->width - calc_sign_space(conv, n);
+		newlen = conv->width - get_sign_space(conv, n);
 	else
 		newlen = conv->precision;
 	if (newlen > len)
@@ -137,7 +133,7 @@ void	add_altform(char **str, t_conversion *conv, t_llint n)
 	char *newstr;
 
 	newstr = NULL;
-	if (get_base(conv->type) == 8)
+	if (get_base(conv->type) == 8 && (*str)[0] != '0')
 	{
 		newstr = ft_strjoin("0", *str);
 		ft_strdel(str);

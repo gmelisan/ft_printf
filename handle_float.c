@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:37 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:03:38 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 20:07:10 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	handle_float(va_list ap, t_conversion *conv)
 {
-	if (!ap)
+	if (!ap && conv)
 		conv = NULL;
 }

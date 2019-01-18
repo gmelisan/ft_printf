@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_unsigned.c                                  :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 16:25:21 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/28 19:03:38 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/22 17:31:55 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/23 18:18:00 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-void	handle_unsigned(va_list ap, t_conversion *conv)
+int		ft_tolower(int c)
 {
-	if (!ap)
-		conv = NULL;
+	if (c >= 'A' && c <= 'Z')
+		return (c - ('A' - 'a'));
+	return (c);
 }
