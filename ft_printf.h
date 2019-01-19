@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:48:16 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 23:30:43 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void			get_type(t_conversion *conv, const char *format, int *i);
 int				handle_conversion(va_list ap, t_conversion **conv);
 void			handle_unknown(t_conversion *conv);
 void			handle_integer(va_list ap, t_conversion *conv);
-char			*create_integer_out(t_conversion *conv, t_llint n);
+char			*int2str_out(t_conversion *conv, t_llint n);
+char			*ptr2str_out(t_conversion *conv, t_llint n);
 void			handle_octal(va_list ap, t_conversion *conv);
 void			handle_hexadecimal(va_list ap, t_conversion *conv);
 void			handle_float(va_list ap, t_conversion *conv);

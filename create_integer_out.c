@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 22:05:02 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/18 23:26:24 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	int2char(int n, int flag_bigsym)
 
 int		get_base(char c)
 {
-	if (c == 'x' || c == 'X')
+	if (c == 'x' || c == 'X' || c == 'p')
 		return (16);
 	if (c == 'o' || c == 'O')
 		return (8);
@@ -166,7 +166,7 @@ void	add_spaces(char **str, t_conversion *conv)
 	}
 }
 
-char	*create_integer_out(t_conversion *conv, t_llint n)
+char	*int2str_out(t_conversion *conv, t_llint n)
 {
 	char	*str;
 	int		flag_unsigned;
@@ -176,12 +176,25 @@ char	*create_integer_out(t_conversion *conv, t_llint n)
 	if (n == 0 && conv->prec_set && conv->precision == 0)
 		str = ft_strnew(0);
 	else
-		str = number_to_string(n, conv, flag_unsigned);
+		str = number_to_string(n, conv, flag_unsigned);	
 	add_zeros(&str, conv, n);
 	if (!flag_unsigned)
 		add_sign(&str, conv, n);
 	if (conv->flags.hash)
 		add_altform(&str, conv, n);
+	add_spaces(&str, conv);
+	return (str);
+}
+
+char	*ptr2str_out(t_conversion *conv, t_llint n)
+{
+	char	*str;
+
+	str = n ? number_to_string(n, conv, 1) : ft_strdup("(nil)");
+	conv->flags.zero = n ? conv->flags.zero : 0;
+	if (n)
+		add_zeros(&str, conv, n);
+	add_altform(&str, conv, n);
 	add_spaces(&str, conv);
 	return (str);
 }

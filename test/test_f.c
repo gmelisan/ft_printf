@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:44:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 17:50:23 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/19 00:55:50 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	test_f_run(char *format, double n)
 	printf(", %f\n[", n);
 	r1 = printf(format, n);
 	printf("] [");
-	/* r2 = ft_printf(format, n); */
+	r2 = ft_printf(format, n);
 	printf("]\n%d %d\n\n", r1, r2);
 }
 
@@ -36,5 +36,10 @@ void	test_f(void)
 	printf("========== test_f ==========\n");
 	printf("============================\n");
 
-	test_f_run("%.70f", 0.3);
+	float n = 42.21;
+
+	printf("%d\n", (int)n >> 31);
+	printf("%d\n", ((int)n >> 23) << 23);
+	
+	
 }
