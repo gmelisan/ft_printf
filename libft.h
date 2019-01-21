@@ -6,7 +6,7 @@
 /*   By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:20:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2018/12/24 15:30:07 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:18:01 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <string.h>
 
-typedef unsigned char	t_uchar;
-typedef unsigned int	t_uint;
+typedef unsigned char		t_uchar;
+typedef unsigned int		t_uint;
+typedef unsigned long int	t_ulint;
 
 /*
 ** libc functions
@@ -233,7 +234,7 @@ char				**ft_strsplit(char const *s, char c);
 ** return: The array of "fresh" strings result of the split.
 */
 
-char				*ft_itoa(int n);
+char				*ft_itoa(long int n);
 
 /*
 ** Allocate (with malloc(3)) and returns a "fresh" string ending with

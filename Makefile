@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/25 15:49:12 by gmelisan          #+#    #+#              #
-#    Updated: 2019/01/21 13:26:37 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/21 17:14:05 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,7 +22,7 @@ handle_string.o handle_integer.o
 
 OBJ += ft_isdigit.o ft_memalloc.o ft_memdel.o ft_strdel.o ft_bzero.o \
 ft_putchar.o ft_itoa.o ft_memset.o ft_strlen.o ft_strnew.o ft_strncpy.o \
-ft_memcpy.o ft_putstr.o ft_strjoin.o ft_strdup.o ft_tolower.o
+ft_memcpy.o ft_putstr.o ft_strjoin.o ft_strdup.o ft_tolower.o ft_itoa.o
 
 all: $(NAME)
 

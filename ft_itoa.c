@@ -6,14 +6,14 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 00:32:54 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/04 19:13:37 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:12:06 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int		count_digits(t_uint n)
+static int		count_digits(t_ulint n)
 {
 	int ret;
 
@@ -28,16 +28,16 @@ static int		count_digits(t_uint n)
 	return (ret);
 }
 
-static t_uint	get_abs(int n)
+static t_ulint	get_abs(long int n)
 {
-	t_uint un;
+	t_ulint un;
 
 	if (n >= 0)
-		un = (t_uint)n;
+		un = (t_ulint)n;
 	else
 	{
 		n = (n + 1) * (-1);
-		un = (t_uint)n;
+		un = (t_ulint)n;
 		un++;
 	}
 	return (un);
@@ -60,8 +60,8 @@ static void		ft_strrev(char *str)
 	}
 }
 
-char			*ft_itoa(int n)
-		{
+char			*ft_itoa(long int n)
+{
 	char	*res;
 	int		i;
 	t_uint	un;

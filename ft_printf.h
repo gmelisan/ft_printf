@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 13:46:25 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 18:16:47 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void			handle_char(va_list ap, t_conversion *conv);
 void			handle_string(va_list ap, t_conversion *conv);
 void			handle_pointer(va_list ap, t_conversion *conv);
 char			*prepare_out(t_conversion *conv, int len);
+t_uint			count_digits(t_ullint n, int base);
 
 #endif
