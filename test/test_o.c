@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 21:09:42 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:20:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:00:28 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	test_o(void)
 	test_o_run("%o", 0);
 	test_o_run("%o", 42);
 	test_o_run("%#o", 42);
+	test_o_run("%#o", 0);
 	test_o_run("%10.5o", 42);
 	test_o_run("%#10.5o", 42);
 	test_o_run("%#-10.5o", 42);

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 19:16:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:54:47 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:24:51 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ void			get_width(va_list ap, t_conversion *conv,
 	if (format[i] == '*')
 	{
 		width = va_arg(ap, int);
-		if (width < 0)
-		{
-			width = -width;
-			conv->flags.minus = 1;
-		}
-		conv->width = width;
+		conv->width = width < 0 ? -width : width;
+		conv->flags.minus = width < 0 ? 1 : conv->flags.minus;
 		i++;
 	}
 	else
@@ -65,25 +61,24 @@ void			get_precision(va_list ap, t_conversion *conv,
 	int i;
 	int prec;
 
-	i = *p_i;
-	if (format[i] == '.')
+	i = *p_i + 1;
+	conv->prec_set = 1;
+	conv->precision = 0;
+	if (format[i] == '*')
 	{
+		prec = va_arg(ap, int);
+		if (prec < 0)
+			conv->prec_set = 0;
+		else
+			conv->precision = prec;
 		i++;
-		conv->prec_set = 1;
-		conv->precision = 0;
-		if (format[i] == '*')
+	}
+	else
+		while (ft_isdigit(format[i]))
 		{
-			prec = va_arg(ap, int);
-			conv->precision = prec > 0 ? prec : 0;
+			conv->precision = conv->precision * 10 + (format[i] - '0');
 			i++;
 		}
-		else
-			while (ft_isdigit(format[i]))
-			{
-				conv->precision = conv->precision * 10 + (format[i] - '0');
-				i++;
-			}
-	}
 	*p_i = i;
 }
 
@@ -109,10 +104,13 @@ void			get_length(t_conversion *conv, const char *format, int *p_i)
 		conv->length = check_length(conv, L_L);
 	else if (format[i] == 'l' && format[i + 1] == 'l')
 		conv->length = check_length(conv, L_LL);
+	else if (format[i] == 'j')
+		conv->length = check_length(conv, L_J);
+	else if (format[i] == 'z')
+		conv->length = check_length(conv, L_Z);
 	if (conv->length == L_HH || conv->length == L_LL)
 		i += 2;
-	else if (conv->length == L_LB || conv->length == L_H ||
-				conv->length == L_L)
+	else if (conv->length)
 		i += 1;
 	*p_i = i;
 }

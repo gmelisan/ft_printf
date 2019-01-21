@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 21:19:42 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 22:41:10 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 15:47:53 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ void	test_x(void)
 	test_x_run("%x", 0);
 	test_x_run("%x", 42);
 	test_x_run("%#x", 42);
+	test_x_run("%#x", 0);
 	test_x_run("%10.5x", 42);
 	test_x_run("%#10.5x", 42);
 	test_x_run("%#10.5X", 42);
 	
-	/* test_x_run("%#-10.5x", 42); */
-	/* test_x_run("%-10.5x", 42); */
-	/* test_x_run("%05x", 42); */
-	/* test_x_run("%05.0x", 42); */
-	/* test_x_run("%05.0x", 0); */
-	/* test_x_run("%#05.0x", 0); */
-	/* test_x_run("%01.0x", 0); */
-	/* test_x_run("%#02.0x", 0); */
-	/* test_x_run("%#X", 520); */
-	/* test_x_run("%#10.5X", 520); */
+	test_x_run("%#-10.5x", 42);
+	test_x_run("%-10.5x", 42);
+	test_x_run("%05x", 42);
+	test_x_run("%05.0x", 42);
+	test_x_run("%05.0x", 0);
+	test_x_run("%#05.0x", 0);
+	test_x_run("%01.0x", 0);
+	test_x_run("%#02.0x", 0);
+	test_x_run("%#X", 520);
+	test_x_run("%#10.5X", 520);
 }

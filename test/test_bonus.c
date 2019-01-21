@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 21:57:08 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 22:28:09 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:18:42 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ void	test_bonus(void)
 
 	test_bonus_run("%b", 666);
 	test_bonus_run("%14.11#b", 666);
-	
+
+	int r1, r2;
+	r1 = printf("[%.*d] ", -15, 42);
+	r2 = ft_printf("[%.*d]\n", -15, 42);
+	printf("%d %d\n", r1, r2);
 }

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 22:43:27 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:08:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int			is_integer(t_uchar c)
 
 int			handle_conversion(va_list ap, t_conversion **conv)
 {
+	if (!(*conv))
+		return (0);
 	if (is_integer((*conv)->type))
 		handle_integer(ap, *conv);
 	else if (ft_tolower((*conv)->type) == 'f')

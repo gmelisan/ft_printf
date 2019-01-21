@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 18:24:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 21:48:38 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:07:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				is_flag(char c)
 
 int				is_length(char c)
 {
-	if (c == 'l' || c == 'h' || c == 'L')
+	if (c == 'l' || c == 'h' || c == 'L' || c == 'j' || c == 'z')
 		return (1);
 	return (0);
 
@@ -47,6 +47,7 @@ t_conversion	*get_conversion(va_list ap, const char *format, int *i)
 			break ;
 	}
 	conv->type = format[*i];
-	*i = *i + 1;
+	if (conv->type)
+		*i = *i + 1;
 	return (conv);
 }

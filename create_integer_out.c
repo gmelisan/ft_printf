@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 23:26:24 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 16:05:25 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,7 @@ char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
 	return (str);
 }
 
-int		get_sign_space(t_conversion *conv, t_llint n)
-{
-	if (get_base(conv->type) == 16 && n != 0)
-		return (2);
-	return (1);
-}
-
-void	add_zeros(char **str, t_conversion *conv, t_llint n)
+void	add_zeros(char **str, t_conversion *conv)
 {
 	char	*newstr;
 	size_t	len;
@@ -97,7 +90,7 @@ void	add_zeros(char **str, t_conversion *conv, t_llint n)
 	if (conv->flags.minus || conv->prec_set)
 		conv->flags.zero = 0;
 	if (conv->flags.zero && conv->width > len)
-		newlen = conv->width - get_sign_space(conv, n);
+		newlen = conv->width - (get_base(conv->type) == 16 ? 2 : 1);
 	else
 		newlen = conv->precision;
 	if (newlen > len)
@@ -133,11 +126,13 @@ void	add_altform(char **str, t_conversion *conv, t_llint n)
 	char *newstr;
 
 	newstr = NULL;
+	if (ft_tolower(conv->type) == 'x' && n == 0)
+		return ;
 	if (get_base(conv->type) == 8 && (*str)[0] != '0')
 		newstr = ft_strjoin("0", *str);
-	else if (get_base(conv->type) == 16 && n != 0)
+	else if (get_base(conv->type) == 16)
 		newstr = ft_strjoin((conv->type == 'X' ? "0X" : "0x"), *str);
-	else if (get_base(conv->type) == 2 && n != 0)
+	else if (get_base(conv->type) == 2)
 		newstr = ft_strjoin("0b", *str);
 	if (newstr)
 	{
@@ -177,24 +172,11 @@ char	*int2str_out(t_conversion *conv, t_llint n)
 		str = ft_strnew(0);
 	else
 		str = number_to_string(n, conv, flag_unsigned);	
-	add_zeros(&str, conv, n);
+	add_zeros(&str, conv);
 	if (!flag_unsigned)
 		add_sign(&str, conv, n);
-	if (conv->flags.hash)
+	if ((conv->flags.hash) || conv->type == 'p')
 		add_altform(&str, conv, n);
-	add_spaces(&str, conv);
-	return (str);
-}
-
-char	*ptr2str_out(t_conversion *conv, t_llint n)
-{
-	char	*str;
-
-	str = n ? number_to_string(n, conv, 1) : ft_strdup("(nil)");
-	conv->flags.zero = n ? conv->flags.zero : 0;
-	if (n)
-		add_zeros(&str, conv, n);
-	add_altform(&str, conv, n);
 	add_spaces(&str, conv);
 	return (str);
 }

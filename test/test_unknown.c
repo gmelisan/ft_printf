@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 20:40:39 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 22:06:28 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 13:56:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	test_unknown(void)
 	test_unknown_run("%10w", "");
 	test_unknown_run("%04k", "");
 	test_unknown_run("%-4k", "");
+	test_unknown_run("%", "");
 }

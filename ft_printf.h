@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 23:30:43 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 13:46:25 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef unsigned long long int	t_ullint;
 ** order matters and means priority when ft_printf finds multiple lengths
 */
 
-enum	e_length {L_NONE, L_HH, L_H, L_L, L_LL, L_LB};
+enum	e_length {L_NONE, L_HH, L_H, L_L, L_Z, L_LL, L_J, L_LB};
 
 typedef struct	s_conversion
 {

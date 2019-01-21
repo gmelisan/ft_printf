@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 20:23:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/16 23:47:35 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 13:53:41 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	handle_unknown(t_conversion *conv)
 	int		len;
 	char	c;
 
+	if (!conv->type)
+		return ;
 	len = conv->width ? conv->width : 1;
 	c = conv->type;
 	conv->out = prepare_out(conv, len);

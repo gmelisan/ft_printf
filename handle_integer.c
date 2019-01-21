@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/18 23:30:42 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/21 15:30:16 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ t_llint	pullarg_integer(va_list ap, t_uchar length)
 		return (long int)va_arg(ap, long int);
 	if (length == L_LL)
 		return (long long int)va_arg(ap, long long int);
+	if (length == L_J)
+		return (intmax_t)va_arg(ap, intmax_t);
+	if (length == L_Z)
+		return (long int)va_arg(ap, long int);
 	return (int)va_arg(ap, int);
 }
 
@@ -35,6 +39,10 @@ t_ullint	pullarg_unsigned(va_list ap, t_uchar length)
 		return (unsigned long int)va_arg(ap, long int);
 	if (length == L_LL)
 		return (unsigned long long int)va_arg(ap, long long int);
+	if (length == L_J)
+		return (uintmax_t)va_arg(ap, uintmax_t);
+	if (length == L_Z)
+		return (size_t)va_arg(ap, size_t);
 	return (unsigned int)va_arg(ap, int);
 }
 
@@ -50,15 +58,14 @@ void	handle_integer(va_list ap, t_conversion *conv)
 	t_llint		n;
 
 	if (is_longtype(conv->type) && conv->length != L_LL)
+	{
 		conv->length = L_L;
-	conv->type = ft_tolower(conv->type);
+		conv->type = ft_tolower(conv->type);
+	}
 	if (conv->type == 'd' || conv->type == 'i')
 		n = pullarg_integer(ap, conv->length);
 	else
 		n = pullarg_unsigned(ap, conv->length);
-	if (conv->type == 'p')
-		conv->out = ptr2str_out(conv, n);
-	else
-		conv->out = int2str_out(conv, n);
+	conv->out = int2str_out(conv, n);
 	write(1, conv->out, ft_strlen(conv->out));
 }
