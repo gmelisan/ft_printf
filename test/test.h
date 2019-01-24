@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:44:51 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 14:12:54 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:03:51 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <math.h>
 
 # include "../ft_printf.h"
 

@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 15:30:16 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/24 11:54:03 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ void	handle_integer(va_list ap, t_conversion *conv)
 		n = pullarg_integer(ap, conv->length);
 	else
 		n = pullarg_unsigned(ap, conv->length);
-	conv->out = int2str_out(conv, n);
+	convert_integer(conv, n);
 	write(1, conv->out, ft_strlen(conv->out));
 }

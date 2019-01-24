@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_integer_out.c                               :+:      :+:    :+:   */
+/*   convert_integer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 17:29:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/24 15:07:09 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_uint		count_digits(t_ullint n, int base)
+static t_uint		count_digits(t_ullint n, int base)
 {
 	t_uint res;
 
@@ -22,7 +22,7 @@ t_uint		count_digits(t_ullint n, int base)
 	return (res);
 }
 
-t_ullint	absolute_value(t_llint n)
+static t_ullint	absolute_value(t_llint n)
 {
 	t_ullint un;
 
@@ -37,7 +37,7 @@ t_ullint	absolute_value(t_llint n)
 	return (un);
 }
 
-char	int2char(int n, int flag_bigsym)
+static char	int2char(int n, int flag_bigsym)
 {
 	if (n > 9)
 		return (n - 10 + (flag_bigsym ? 'A' : 'a'));
@@ -45,7 +45,7 @@ char	int2char(int n, int flag_bigsym)
 }
 
 
-int		get_base(char c)
+static int		get_base(char c)
 {
 	if (c == 'x' || c == 'X' || c == 'p')
 		return (16);
@@ -56,7 +56,7 @@ int		get_base(char c)
 	return (10);
 }
 
-char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
+static char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
 {
 	t_uint		digits;
 	int			i;
@@ -80,13 +80,13 @@ char	*number_to_string(t_llint n, t_conversion *conv, int flag_unsigned)
 	return (str);
 }
 
-void	add_zeros(char **str, t_conversion *conv)
+static void	add_zeros(t_conversion *conv)
 {
 	char	*newstr;
 	size_t	len;
 	size_t	newlen;
 
-	len = ft_strlen(*str);
+	len = ft_strlen(conv->out);
 	if (conv->flags.minus || conv->prec_set)
 		conv->flags.zero = 0;
 	if (conv->flags.zero && conv->width > len)
@@ -97,86 +97,84 @@ void	add_zeros(char **str, t_conversion *conv)
 	{
 		newstr = ft_strnew(newlen);
 		ft_memset(newstr, '0', newlen);
-		ft_memcpy(newstr + (newlen - len), *str, len);
-		ft_strdel(str);
-		*str = newstr;
+		ft_memcpy(newstr + (newlen - len), conv->out, len);
+		ft_strdel(&(conv->out));
+		conv->out = newstr;
 	}
 }
 
-void	add_sign(char **str, t_conversion *conv, t_llint n)
+static void	add_sign(t_conversion *conv, t_llint n)
 {
 	char *newstr;
 
 	newstr = NULL;
 	if (n < 0)
-		newstr = ft_strjoin("-", *str);
+		newstr = ft_strjoin("-", conv->out);
 	else if (conv->flags.plus)
-		newstr = ft_strjoin("+", *str);
+		newstr = ft_strjoin("+", conv->out);
 	else if (conv->flags.space)
-		newstr = ft_strjoin(" ", *str);
+		newstr = ft_strjoin(" ", conv->out);
 	if (newstr)
 	{
-		ft_strdel(str);
-		*str = newstr;
+		ft_strdel(&(conv->out));
+		conv->out = newstr;
 	}
 }
 
-void	add_altform(char **str, t_conversion *conv, t_llint n)
+static void	add_altform(t_conversion *conv, t_llint n)
 {
 	char *newstr;
 
 	newstr = NULL;
 	if (ft_tolower(conv->type) == 'x' && n == 0)
 		return ;
-	if (get_base(conv->type) == 8 && (*str)[0] != '0')
-		newstr = ft_strjoin("0", *str);
+	if (get_base(conv->type) == 8 && conv->out[0] != '0')
+		newstr = ft_strjoin("0", conv->out);
 	else if (get_base(conv->type) == 16)
-		newstr = ft_strjoin((conv->type == 'X' ? "0X" : "0x"), *str);
+		newstr = ft_strjoin((conv->type == 'X' ? "0X" : "0x"), conv->out);
 	else if (get_base(conv->type) == 2)
-		newstr = ft_strjoin("0b", *str);
+		newstr = ft_strjoin("0b", conv->out);
 	if (newstr)
 	{
-		ft_strdel(str);
-		*str = newstr;
+		ft_strdel(&(conv->out));
+		conv->out = newstr;
 	}
 }
 
-void	add_spaces(char **str, t_conversion *conv)
+static void	add_spaces(t_conversion *conv)
 {
 	char	*newstr;
 	int		len;
 	int		newlen;
 
-	len = ft_strlen(*str);
+	len = ft_strlen(conv->out);
 	newlen = conv->width;
 	if (newlen > len)
 	{
 		newstr = prepare_out(conv, newlen);
 		if (conv->flags.minus)
-			ft_memcpy(newstr, *str, len);
+			ft_memcpy(newstr, conv->out, len);
 		else
-			ft_memcpy(newstr + (newlen - len), *str, len);
-		ft_strdel(str);
-		*str = newstr;
+			ft_memcpy(newstr + (newlen - len), conv->out, len);
+		ft_strdel(&(conv->out));
+		conv->out = newstr;
 	}
 }
 
-char	*int2str_out(t_conversion *conv, t_llint n)
+void	convert_integer(t_conversion *conv, t_llint n)
 {
-	char	*str;
 	int		flag_unsigned;
 
-	str = NULL;
+	conv->out = NULL;
 	flag_unsigned = (conv->type == 'd' || conv->type == 'i') ? 0 : 1;
 	if (n == 0 && conv->prec_set && conv->precision == 0)
-		str = ft_strnew(0);
+		conv->out = ft_strnew(0);
 	else
-		str = number_to_string(n, conv, flag_unsigned);	
-	add_zeros(&str, conv);
+		conv->out = number_to_string(n, conv, flag_unsigned);	
+	add_zeros(conv);
 	if (!flag_unsigned)
-		add_sign(&str, conv, n);
+		add_sign(conv, n);
 	if ((conv->flags.hash) || conv->type == 'p')
-		add_altform(&str, conv, n);
-	add_spaces(&str, conv);
-	return (str);
+		add_altform(conv, n);
+	add_spaces(conv);
 }
