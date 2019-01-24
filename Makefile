@@ -6,14 +6,14 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/25 15:49:12 by gmelisan          #+#    #+#              #
-#    Updated: 2019/01/21 17:14:05 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/24 06:54:10 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra #-Werror
 CFLAGS += -g
 
 OBJ = ft_printf.o get_conversion.o get_conv_func.o handle_conversion.o \
