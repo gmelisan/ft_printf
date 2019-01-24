@@ -6,7 +6,7 @@
 #    By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/28 16:40:09 by gmelisan          #+#    #+#              #
-#    Updated: 2019/01/18 22:31:05 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/24 16:27:38 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra #-Werror
 CFLAGS += -g
 
 OBJ = main.o test_c.o test_s.o test_d.o test_f.o test_unknown.o test_u.o \
-test_o.o test_x.o test_bonus.o test_p.o
+test_o.o test_x.o test_bonus.o test_p.o test_wc.o
 
 all: $(NAME)
 

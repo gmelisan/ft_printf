@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:44:51 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/24 16:03:51 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/24 16:25:52 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ typedef unsigned long long int t_ullint;
 
 void	test_unknown(void);
 void	test_c(void);
+void	test_wc(void);
 void	test_s(void);
+void	test_wc(void);
 void	test_d(void);
 void	test_u(void);
 void	test_o(void);
