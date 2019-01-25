@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/24 16:39:23 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/25 15:22:17 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,12 @@ char	*prepare_out(t_conversion *conv, int len)
 	return (out);
 }
 
-void	handle_wchar(va_list ap, t_conversion *conv)
-{
-	/* wint_t	c; */
-	/* int		len; */
-
-	/* c = (wchar_t)va_arg(ap, wchar_t); */
-	
-	
-}
-
 void	handle_char(va_list ap, t_conversion *conv)
 {
 	int		len;
 	char	c;
 
-	if (conv->type == 'C')
+	if (conv->type == 'C' || conv->length == L_L)
 		handle_wchar(ap, conv);
 	else
 	{
@@ -52,8 +42,7 @@ void	handle_char(va_list ap, t_conversion *conv)
 			conv->out[0] = c;
 		else
 			conv->out[len - 1] = c;
-		write(1, conv->out, len);
-		if (!c)
-			ft_memset(conv->out, '0', len);
+		conv->outlen = len;
+		write(1, conv->out, conv->outlen);
 	}
 }

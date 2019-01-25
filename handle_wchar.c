@@ -1,0 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_wchar.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/25 13:07:42 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/25 18:03:15 by gmelisan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <wchar.h>
+#include "ft_printf.h"
+
+/*
+** 00 111111 = 0x3F
+** 10 000000 = 0x80
+** 000 11111 = 0x1F
+** 110 00000 = 0xC0
+** 1110 0000 = 0xE0
+** 11110 000 = 0xF0
+*/
+
+static int	ft_wctomb_utf8_2(char *s, wchar_t wc)
+{
+	s[1] = (wc & 0x3F) | 0x80;
+	s[0] = ((wc >> 6) & 0x1F) | 0xC0; 
+	return (2);
+}
+
+static int	ft_wctomb_utf8_3(char *s, wchar_t wc)
+{
+	s[2] = (wc & 0x3F) | 0x80;
+	s[1] = ((wc >> 6) & 0x3f) | 0x80;
+	s[0] = ((wc >> 12) & 0xF) | 0xE0;
+	return (3);
+}
+
+static int	ft_wctomb_utf8_4(char *s, wchar_t wc)
+{
+	s[3] = (wc & 0x3F) | 0x80;
+	s[2] = ((wc >> 6) & 0x3F) | 0x80;
+	s[1] = ((wc >> 12) & 0x3F) | 0x80;
+	s[0] = ((wc >> 18) & 0x07) | 0xF0;
+	return (4);
+}
+
+int			ft_wctomb_utf8(char *s, wchar_t wc)
+{
+	if ((t_uint)wc <= 0x7f)
+	{ 
+		s[0] = wc;
+		return (1);
+	}
+	else if ((t_uint)wc <= 0x7FF)
+		return (ft_wctomb_utf8_2(s, wc));
+	else if ((t_uint)wc <= 0xFFFF)
+		return (ft_wctomb_utf8_3(s, wc));
+	else if ((t_uint)wc <= 0x10FFFF)
+		return (ft_wctomb_utf8_4(s, wc));
+	else
+		return (-1);
+}
+
+void		handle_wchar(va_list ap, t_conversion *conv)
+{
+	wint_t	wc;
+	char	s[5];
+	int		wclen;
+	int		len;
+
+	wc = (wint_t)va_arg(ap, wint_t);
+	ft_bzero(s, 5);
+	wclen = ft_wctomb_utf8(s, wc);
+	conv->outlen = wclen;
+	if (wclen == -1)
+		return ;
+	len = conv->width > (t_uint)wclen ? conv->width : wclen;
+	conv->out = prepare_out(conv, len);
+	if (conv->flags.minus)
+		ft_memcpy(conv->out, s, wclen);
+	else
+		ft_memcpy(conv->out + (len - wclen), s, wclen);
+	conv->outlen = len;
+	write(1, conv->out, conv->outlen);
+}

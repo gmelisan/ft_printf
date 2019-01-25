@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 14:08:19 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/25 16:15:41 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 static int	clear(t_conversion **conv)
 {
-	int res;
+	int ret;
 
-	res = (*conv)->out ? ft_strlen((*conv)->out) : 0;
+	ret = (*conv)->outlen;
 	ft_strdel(&(*conv)->out);
 	ft_memdel((void **)conv);
-	return (res);
+	return (ret);
 }
 
-int			is_integer(t_uchar c)
+static int	is_integer(t_uchar c)
 {
 	if (c == 'd' || c == 'D' || c == 'i' ||
 		c == 'u' || c == 'U' ||

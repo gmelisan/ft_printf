@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 20:23:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 13:53:41 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/25 15:07:24 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	handle_unknown(t_conversion *conv)
 		conv->out[0] = c;
 	else
 		conv->out[len - 1] = c;
-	write(1, conv->out, len);
+	conv->outlen = len;
+	write(1, conv->out, conv->outlen);
 	if (!c)
 	{
 		ft_memset(conv->out, '0', len);

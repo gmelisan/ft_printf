@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:27:24 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 14:53:56 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/25 18:13:15 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	handle_null_string(t_conversion *conv)
 		ft_memcpy(conv->out, str ,strsize);
 	else
 		ft_memcpy(conv->out + (len - strsize), str, strsize);
-	write(1, conv->out, len);
+	conv->outlen = len;
+	write(1, conv->out, conv->outlen);
 	ft_strdel(&str);
 }
 
@@ -53,5 +54,6 @@ void	handle_string(va_list ap, t_conversion *conv)
 		ft_memcpy(conv->out, str ,strsize);
 	else
 		ft_memcpy(conv->out + (len - strsize), str, strsize);
-	write(1, conv->out, len);
+	conv->outlen = len;
+	write(1, conv->out, conv->outlen);
 }

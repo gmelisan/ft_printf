@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/24 14:41:43 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/25 14:50:37 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_conversion
 	enum e_length	length;
 	t_uchar			type;
 	char			*out;
+	int				outlen;
 }				t_conversion;
 
 /*
@@ -71,6 +72,7 @@ void			handle_hexadecimal(va_list ap, t_conversion *conv);
 void			handle_float(va_list ap, t_conversion *conv);
 void			convert_float(t_conversion *conv, long double n);
 void			handle_char(va_list ap, t_conversion *conv);
+void			handle_wchar(va_list ap, t_conversion *conv);
 void			handle_string(va_list ap, t_conversion *conv);
 void			handle_pointer(va_list ap, t_conversion *conv);
 char			*prepare_out(t_conversion *conv, int len);
