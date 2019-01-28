@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:07:42 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/25 18:03:15 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/26 18:52:16 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ int			ft_wctomb_utf8(char *s, wchar_t wc)
 		return (-1);
 }
 
+int			ft_wctomb_utf32(char *s, wchar_t wc)
+{
+	if ((t_uint)wc > 0x10FFFF)
+		return (-1);
+	s[0] = wc & 0xFF000000;
+	s[1] = wc & 0xFF0000;
+	s[2] = wc & 0xFF00;
+	s[3] = wc & 0xFF;
+	return (4);
+}
+
 void		handle_wchar(va_list ap, t_conversion *conv)
 {
 	wint_t	wc;
@@ -76,7 +87,7 @@ void		handle_wchar(va_list ap, t_conversion *conv)
 	conv->outlen = wclen;
 	if (wclen == -1)
 		return ;
-	len = conv->width > (t_uint)wclen ? conv->width : wclen;
+	len = conv->width > (t_uint)wclen ? (int)conv->width : wclen;
 	conv->out = prepare_out(conv, len);
 	if (conv->flags.minus)
 		ft_memcpy(conv->out, s, wclen);

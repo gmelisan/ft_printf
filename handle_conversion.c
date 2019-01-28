@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 21:17:44 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/25 16:15:41 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:45:54 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int			handle_conversion(va_list ap, t_conversion **conv)
 		return (0);
 	if (is_integer((*conv)->type))
 		handle_integer(ap, *conv);
-	else if (ft_tolower((*conv)->type) == 'f')
+	else if (ft_tolower((*conv)->type) == 'f' ||
+				ft_tolower((*conv)->type) == 'e')
 		handle_float(ap, *conv);
 	else if (ft_tolower((*conv)->type) == 'c')
 		handle_char(ap, *conv);

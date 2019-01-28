@@ -6,20 +6,27 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:37 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/25 14:52:31 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/26 21:09:54 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+static int	is_upper(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (1);
+	return (0);
+}
+
 static int	check_non_valid(t_conversion *conv, long double n)
 {
 	if (n != n)
-		conv->out = ft_strdup(conv->type == 'F' ? "NAN" : "nan");
+		conv->out = ft_strdup(is_upper(conv->type) ? "NAN" : "nan");
 	else if (n == 1.0 / 0)
-		conv->out = ft_strdup(conv->type == 'F' ? "INF" : "inf");
+		conv->out = ft_strdup(is_upper(conv->type) ? "INF" : "inf");
 	else if (n == -1.0 / 0)
-		conv->out = ft_strdup(conv->type == 'F' ? "-INF" : "-inf");
+		conv->out = ft_strdup(is_upper(conv->type) ? "-INF" : "-inf");
 	else
 		return (1);
 	return (0);	

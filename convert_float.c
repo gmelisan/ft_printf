@@ -6,30 +6,44 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 11:57:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/24 16:02:12 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 09:27:19 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void				round_digit(int *n, int next)
-{
-	if (next >= 5)
-		*n = *n + 1;
-}
-
-/*
-** n: 123.456 -> 1.23456
-** digits: 0 -> 3
+/* 
+** 123.456 (double) -> 1.234566 (double)
 */
 
-static void			normalize(long double *n, int *digits)
+static void			normalize_f(long double *n, int *digits)
 {
 	*digits = 1;
 	while (*n >= 10)
 	{
 		*n = *n / 10;
 		(*digits)++;
+	}
+}
+
+/* 
+** 123.456 (double) -> 1.234566 (double)
+** 0.00123 (double) -> 1.23 (double)
+*/
+
+static void			normalize_e(long double *n, int *digits)
+{
+	if (*n >= 1)
+		normalize_f(n, digits);
+	else
+	{
+		*digits = -1;
+		while (*n < 1)
+		{
+			*n = *n * 10;
+			(*digits)++;
+		}
+		*digits = -(*digits);
 	}
 }
 
@@ -58,6 +72,47 @@ static void			shift_point(long double n, char *str,
 		sub += d;
 		str[i++] = d + '0';
 	}
+}
+
+/* 
+** 1.23456 (double) -> 1.23456 (char *)
+*/
+
+static void			shift_point_1(long double n, char *str, int prec)
+{
+	int				i;
+	long double		sub;
+	int				d;
+
+	i = 0;
+	d = (int)n;
+	str[i++] = d + '0';
+	str[i++] = '.';
+	sub = (long double)d;
+	while (i < prec + 2 + 1)
+	{
+		n = n * 10;
+		sub = sub * 10;
+		d = n - sub;
+		sub += d;
+		str[i++] = d + '0';
+	}
+}
+
+/*
+** One day I'll get rid of all these reallocs, but not today
+*/
+
+static int			add_e(char **str, int len, char e, int exp)
+{
+	ft_realloc((void **)str, len, len + 5);
+	(*str)[len + 0] = e;
+	(*str)[len + 1] = (exp >= 0 ? '+' : '-');
+	exp = (exp > 0 ? exp : -exp);
+	(*str)[len + 2] = exp / 10 + '0';
+	(*str)[len + 3] = exp % 10 + '0';
+	(*str)[len + 4] = '\0';
+	return (len + 4);
 }
 
 /*
@@ -93,7 +148,7 @@ static void			round(char *str, int i, int carry)
 ** len = 3(digits) + 1(dot) + precision + 1(for rounding)
 */
 
-static void			number_to_string(t_conversion *conv, long double n)
+static void			number_to_string_f(t_conversion *conv, long double n)
 {
 	int		digits;
 	int		len;
@@ -101,7 +156,7 @@ static void			number_to_string(t_conversion *conv, long double n)
 	digits = 0;
 	if (n < 0)
 		n = -n;
-	normalize(&n , &digits);
+	normalize_f(&n , &digits);
 	if (conv->prec_set && conv->precision == 0)
 		len = digits + (conv->flags.hash ? 1 : 0) + 1;
 	else 
@@ -110,6 +165,25 @@ static void			number_to_string(t_conversion *conv, long double n)
 	shift_point(n, conv->out, len, digits);
 	round(conv->out, len - 1, 0);
 	conv->out[len - 1] = '\0';
+}
+
+static void			number_to_string_e(t_conversion *conv, long double n)
+{
+	int		digits;
+	int		len;
+
+	digits = 0;
+	if (n < 0)
+		n = -n;
+	normalize_e(&n , &digits);
+	if (conv->prec_set && conv->precision == 0)
+		len = 1 + (conv->flags.hash ? 1 : 0) + 1;
+	else 
+		len = 1 + 1 + conv->precision + 1;
+	conv->out = ft_strnew(len);
+	shift_point_1(n, conv->out, conv->precision);
+	round(conv->out, len - 1, 0);
+	add_e(&(conv->out), len - 1, conv->type, digits - 1);
 }
 
 static void			add_zeros(t_conversion *conv)
@@ -174,9 +248,11 @@ static void			add_spaces(t_conversion *conv)
 
 void				convert_float(t_conversion *conv, long double n)
 {
-	number_to_string(conv, n);
+	if (ft_tolower(conv->type) == 'f')
+		number_to_string_f(conv, n);
+	else if (ft_tolower(conv->type) == 'e')
+		number_to_string_e(conv, n);
 	add_zeros(conv);
 	add_sign(conv, n);
 	add_spaces(conv);
 }
-
