@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:58:26 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 19:25:28 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@
 # include <unistd.h>
 # include <wchar.h>
 # include "libft.h"
+
+# define USE_COLORS		1
+
+# define COLOR_BLACK	"\033[0;30m"
+# define COLOR_RED		"\033[0;31m"
+# define COLOR_GREEN	"\033[0;32m"
+# define COLOR_YELLOW	"\033[0;33m"
+# define COLOR_BLUE		"\033[0;34m"
+# define COLOR_PURPLE	"\033[0;35m"
+# define COLOR_CYAN		"\033[0;36m"
+# define COLOR_EOC		"\033[0m"
 
 typedef unsigned char			t_uchar;
 typedef unsigned int			t_uint;
@@ -86,11 +97,15 @@ void			normalize_f(long double *n, int *digits);
 
 void			handle_char(va_list ap, t_conversion *conv);
 void			handle_wchar(va_list ap, t_conversion *conv);
+int				ft_wctomb_utf8(char *s, wchar_t wc);
 void			handle_string(va_list ap, t_conversion *conv);
 void			handle_wstring(va_list ap, t_conversion *conv);
 
 void			clear_conversion(t_conversion **conv);
 
 char			*prepare_out(t_conversion *conv, int len);
+
+int				handle_color(char *color_before, char *color_after, int size);
+char			*get_color(const char *format, int i);
 
 #endif

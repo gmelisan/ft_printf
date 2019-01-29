@@ -6,10 +6,11 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 17:44:15 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/26 21:04:56 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 16:03:38 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "test.h"
 
 void	test_f_run(char *format, double n)

@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:24:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 15:14:47 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:53:12 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		convert_integer(t_conversion *conv, t_llint n)
 	if (n == 0 && conv->prec_set && conv->precision == 0)
 		conv->out = ft_strnew(0);
 	else
-		conv->out = number_to_string(n, conv, flag_unsigned);	
+		conv->out = number_to_string(n, conv, flag_unsigned);
 	add_zeros(conv);
 	if (!flag_unsigned)
 		add_sign(conv, n);

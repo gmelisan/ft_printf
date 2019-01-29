@@ -6,13 +6,13 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 16:29:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:46:51 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:02:56 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* 
+/*
 ** 123.456 (double) -> 1.234566 (double)
 */
 
@@ -54,7 +54,7 @@ static void		shift_point(long double n, char *str,
 }
 
 /*
-** prec = 2 
+** prec = 2
 ** 123.456 -> 123.46
 ** 123.496 -> 123.50
 ** 123.999 -> 124.00
@@ -89,10 +89,10 @@ void			number_to_string_f(t_conversion *conv, long double n)
 	digits = 0;
 	if (n < 0)
 		n = -n;
-	normalize_f(&n , &digits);
+	normalize_f(&n, &digits);
 	if (conv->prec_set && conv->precision == 0)
 		len = digits + (conv->flags.hash ? 1 : 0) + 1;
-	else 
+	else
 		len = digits + 1 + conv->precision + 1;
 	conv->out = ft_strnew(len);
 	shift_point(n, conv->out, len, digits);

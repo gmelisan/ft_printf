@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/29 20:06:27 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/29 16:57:04 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/29 17:36:28 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "ft_printf.h"
 
-union u_double
+char	*get_color(const char *format, int i)
 {
-	long double		val;
-	char		data[sizeof(long double)];
-};
+	int		start;
+	char	*str;
 
-
-int		main(void)
-{
-	setbuf(stdout, NULL);
-	/* test_unknown(); */
-	/* test_c(); */
-	test_wc();
-	/* test_s(); */
-	/* test_ws(); */
-	/* test_d(); */
-	/* test_u(); */
-	/* test_o(); */
-	/* test_x(); */
-	/* test_p(); */
-	/* test_f(); */
-	/* test_bonus(); */
-
-	return (0);
+	start = i + 1;
+	while (format[i] != '}')
+	{
+		if (format[i] == '\0')
+			return (NULL);
+		i++;
+	}
+	str = ft_strnew(i - start);
+	ft_strncpy(str, &format[start], i - start);
+	return (str);
 }

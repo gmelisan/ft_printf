@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 15:11:43 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:45:14 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:00:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static char		int2char(int n, int flag_bigsym)
 		return (n - 10 + (flag_bigsym ? 'A' : 'a'));
 	return (n + '0');
 }
-
 
 int				get_base(char c)
 {

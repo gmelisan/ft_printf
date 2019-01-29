@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:37 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 12:23:15 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:02:02 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int	check_non_valid(t_conversion *conv, long double n)
 		conv->out = ft_strdup(is_upper(conv->type) ? "-INF" : "-inf");
 	else
 		return (1);
-	return (0);	
+	return (0);
 }
 
-void	handle_float(va_list ap, t_conversion *conv)
+void		handle_float(va_list ap, t_conversion *conv)
 {
 	long double		n;
 

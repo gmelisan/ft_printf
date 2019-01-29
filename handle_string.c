@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:27:24 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:43:03 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:59:07 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	convert_string(t_conversion *conv, char *str)
 	len = conv->width > strsize ? conv->width : strsize;
 	conv->out = prepare_out(conv, len);
 	if (conv->flags.minus)
-		ft_memcpy(conv->out, str ,strsize);
+		ft_memcpy(conv->out, str, strsize);
 	else
 		ft_memcpy(conv->out + (len - strsize), str, strsize);
 	conv->outlen = len;

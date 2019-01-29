@@ -6,13 +6,13 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 11:57:16 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:35:11 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:58:50 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void			add_zeros(t_conversion *conv)
+static void		add_zeros(t_conversion *conv)
 {
 	char	*newstr;
 	size_t	len;
@@ -34,7 +34,7 @@ static void			add_zeros(t_conversion *conv)
 	}
 }
 
-static void			add_sign(t_conversion *conv, long double n)
+static void		add_sign(t_conversion *conv, long double n)
 {
 	char *newstr;
 
@@ -52,7 +52,7 @@ static void			add_sign(t_conversion *conv, long double n)
 	}
 }
 
-static void			add_spaces(t_conversion *conv)
+static void		add_spaces(t_conversion *conv)
 {
 	char	*newstr;
 	int		len;
@@ -72,7 +72,7 @@ static void			add_spaces(t_conversion *conv)
 	}
 }
 
-void				convert_float(t_conversion *conv, long double n)
+void			convert_float(t_conversion *conv, long double n)
 {
 	if (ft_tolower(conv->type) == 'f')
 		number_to_string_f(conv, n);

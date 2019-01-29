@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 09:58:25 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 10:01:47 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:05:57 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ void	test_ws_run(char *format, wchar_t *s)
 
 void	test_ws(void)
 {
-	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "en_US.UTF-8");
 	printf("============================\n");
 	printf("========== test_ws ==========\n");
 	printf("============================\n");
 	printf("[printf] [ft_printf]\n");
 	printf("ret ft_ret\n\n");
 
-	wchar_t s[] = {254, 254, 254, 0};
-	test_ws_run("%.4S", s);
-	
-	printf("\n");
+	wchar_t s[] = {254, 437, 254, 0};
+
+	test_ws_run("%S", L"我是一只猫。");
+	/* test_ws_run("%010.10S", s); */
 }

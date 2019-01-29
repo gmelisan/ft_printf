@@ -6,25 +6,16 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 13:07:42 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 17:03:45 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 20:20:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/*
-** 00 111111 = 0x3F
-** 10 000000 = 0x80
-** 000 11111 = 0x1F
-** 110 00000 = 0xC0
-** 1110 0000 = 0xE0
-** 11110 000 = 0xF0
-*/
-
 static int	ft_wctomb_utf8_2(char *s, wchar_t wc)
 {
 	s[1] = (wc & 0x3F) | 0x80;
-	s[0] = ((wc >> 6) & 0x1F) | 0xC0; 
+	s[0] = ((wc >> 6) & 0x1F) | 0xC0;
 	return (2);
 }
 
@@ -48,10 +39,14 @@ static int	ft_wctomb_utf8_4(char *s, wchar_t wc)
 int			ft_wctomb_utf8(char *s, wchar_t wc)
 {
 	if ((t_uint)wc <= 0x7f)
-	{ 
+	{
 		s[0] = wc;
 		return (1);
 	}
+	if (((t_uint)wc <= 0x9f &&
+		(t_uint)wc != 0x24 && (t_uint)wc != 0x40 && (t_uint)wc != 0x60) ||
+		((t_uint)wc >= 0xd800 && (t_uint)wc <= 0xdfff))
+		return (-1);
 	else if ((t_uint)wc <= 0x7FF)
 		return (ft_wctomb_utf8_2(s, wc));
 	else if ((t_uint)wc <= 0xFFFF)

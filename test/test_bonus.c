@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 21:57:08 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 09:27:24 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:48:12 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,8 @@ void	test_bonus(void)
 
 	long double ld = 0.00005;
 	test_bonus_e_run("%.2Le", ld);
+	ft_printf("{black}black {red}red\n");
+	ft_printf("{green}green {yellow}yellow\n");
+	ft_printf("{blue}blue {purple}purple\n");
+	ft_printf("{cyan}cyan {eoc}eoc\n");
 }

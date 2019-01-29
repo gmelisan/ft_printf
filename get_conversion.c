@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 18:24:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 14:43:36 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:55:29 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int		is_length(char c)
 	if (c == 'l' || c == 'h' || c == 'L' || c == 'j' || c == 'z')
 		return (1);
 	return (0);
-
 }
 
 t_conversion	*get_conversion(va_list ap, const char *format, int *i)

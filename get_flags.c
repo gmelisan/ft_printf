@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 14:47:27 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 14:47:36 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:53:53 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			get_flags(t_conversion *conv, const char *format, int *p_i)
 {
 	int i;
 
-	i = *p_i;	
+	i = *p_i;
 	if (format[i] == '#')
 		conv->flags.hash = 1;
 	if (format[i] == '0')

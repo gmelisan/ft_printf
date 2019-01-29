@@ -6,13 +6,13 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 16:33:04 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 16:35:11 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/29 18:02:18 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* 
+/*
 ** 123.456 (double) -> 1.234566 (double)
 ** 0.00123 (double) -> 1.23 (double)
 */
@@ -33,8 +33,7 @@ static void			normalize_e(long double *n, int *digits)
 	}
 }
 
-
-/* 
+/*
 ** 1.23456 (double) -> 1.23456 (char *)
 */
 
@@ -75,7 +74,7 @@ static int			add_e(char **str, int len, char e, int exp)
 	return (len + 4);
 }
 
-/* 
+/*
 ** n = 123.456
 ** len = 3(digits) + 1(dot) + precision + 1(for rounding)
 */
@@ -88,10 +87,10 @@ void				number_to_string_e(t_conversion *conv, long double n)
 	digits = 0;
 	if (n < 0)
 		n = -n;
-	normalize_e(&n , &digits);
+	normalize_e(&n, &digits);
 	if (conv->prec_set && conv->precision == 0)
 		len = 1 + (conv->flags.hash ? 1 : 0) + 1;
-	else 
+	else
 		len = 1 + 1 + conv->precision + 1;
 	conv->out = ft_strnew(len);
 	shift_point_1(n, conv->out, conv->precision);

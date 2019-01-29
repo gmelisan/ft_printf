@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:05:59 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/29 20:06:27 by gmelisan         ###   ########.fr       */
+/*   Created: 2018/11/21 20:20:13 by gmelisan          #+#    #+#             */
+/*   Updated: 2018/11/21 20:29:27 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "libft.h"
 
-union u_double
+char	*ft_strcpy(char *dst, const char *src)
 {
-	long double		val;
-	char		data[sizeof(long double)];
-};
+	size_t len;
 
-
-int		main(void)
-{
-	setbuf(stdout, NULL);
-	/* test_unknown(); */
-	/* test_c(); */
-	test_wc();
-	/* test_s(); */
-	/* test_ws(); */
-	/* test_d(); */
-	/* test_u(); */
-	/* test_o(); */
-	/* test_x(); */
-	/* test_p(); */
-	/* test_f(); */
-	/* test_bonus(); */
-
-	return (0);
+	len = ft_strlen(src);
+	ft_memcpy(dst, src, len);
+	dst[len] = '\0';
+	return (dst);
 }
