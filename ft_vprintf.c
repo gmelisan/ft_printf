@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 14:53:36 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/28 14:41:12 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/28 14:41:21 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+int		ft_vprintf(const char *format, va_list ap)
 {
-	int			ret;
-	va_list		ap;
-
-	va_start(ap, format);
-	ret = ft_vfdprintf(1, format, ap);
-	va_end(ap);
-	return (ret);
+	return (ft_vfdprintf(1, format, ap));
 }

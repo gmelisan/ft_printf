@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:37 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/26 21:09:54 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:23:15 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,4 @@ void	handle_float(va_list ap, t_conversion *conv)
 	if (check_non_valid(conv, n))
 		convert_float(conv, n);
 	conv->outlen = ft_strlen(conv->out);
-	write(1, conv->out, conv->outlen);
 }

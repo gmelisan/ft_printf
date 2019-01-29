@@ -6,7 +6,7 @@
 #    By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/25 15:49:12 by gmelisan          #+#    #+#              #
-#    Updated: 2019/01/26 19:46:28 by gmelisan         ###   ########.fr        #
+#    Updated: 2019/01/28 16:40:18 by gmelisan         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,9 +16,17 @@ CC = gcc
 CFLAGS = -Wall -Wextra #-Werror
 CFLAGS += -g
 
-OBJ = ft_printf.o get_conversion.o get_conv_func.o handle_conversion.o \
-handle_unknown.o convert_integer.o handle_float.o handle_char.o \
-handle_string.o handle_integer.o convert_float.o handle_wchar.o
+OBJ = ft_printf.o ft_vprintf.o ft_fdprintf.o ft_vfdprintf.o
+OBJ += get_conversion.o get_flags.o get_width.o get_precision.o get_length.o
+
+OBJ += handle_conversion.o
+
+OBJ += handle_unknown.o
+OBJ += handle_char.o handle_string.o
+OBJ += handle_wchar.o handle_wstring.o
+OBJ += handle_integer.o convert_integer.o number_to_string.o
+OBJ += handle_float.o convert_float.o \
+number_to_string_f.o number_to_string_e.o
 
 OBJ += ft_isdigit.o ft_memalloc.o ft_memdel.o ft_strdel.o ft_bzero.o \
 ft_putchar.o ft_itoa.o ft_memset.o ft_strlen.o ft_strnew.o ft_strncpy.o \

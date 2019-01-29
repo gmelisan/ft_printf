@@ -6,13 +6,13 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 14:47:31 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/26 18:44:04 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 15:06:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_llint	pullarg_integer(va_list ap, t_uchar length)
+static t_llint		pullarg_integer(va_list ap, t_uchar length)
 {
 	if (length == L_HH)
 		return (signed char)va_arg(ap, int);
@@ -29,7 +29,7 @@ t_llint	pullarg_integer(va_list ap, t_uchar length)
 	return (int)va_arg(ap, int);
 }
 
-t_ullint	pullarg_unsigned(va_list ap, t_uchar length)
+static t_ullint		pullarg_unsigned(va_list ap, t_uchar length)
 {
 	if (length == L_HH)
 		return (unsigned char)va_arg(ap, int);
@@ -46,14 +46,14 @@ t_ullint	pullarg_unsigned(va_list ap, t_uchar length)
 	return (unsigned int)va_arg(ap, int);
 }
 
-int		is_longtype(char c)
+static int			is_longtype(char c)
 {
 	if (c == 'D' || c == 'U' || c == 'O' || c  == 'p')
 		return (1);
 	return (0);
 }
 
-void	handle_integer(va_list ap, t_conversion *conv)
+void				handle_integer(va_list ap, t_conversion *conv)
 {
 	t_llint		n;
 
@@ -68,5 +68,4 @@ void	handle_integer(va_list ap, t_conversion *conv)
 		n = pullarg_unsigned(ap, conv->length);
 	convert_integer(conv, n);
 	conv->outlen = ft_strlen(conv->out);
-	write(1, conv->out, conv->outlen);
 }

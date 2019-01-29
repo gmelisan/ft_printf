@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   handle_wstring.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/25 16:01:06 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 14:53:36 by gmelisan         ###   ########.fr       */
+/*   Created: 2019/01/28 16:40:26 by gmelisan          #+#    #+#             */
+/*   Updated: 2019/01/28 17:03:45 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+void	handle_wstring(va_list ap, t_conversion *conv)
 {
-	int			ret;
-	va_list		ap;
+	wchar_t		*ws;
+	int			wslen;
+	
 
-	va_start(ap, format);
-	ret = ft_vfdprintf(1, format, ap);
-	va_end(ap);
-	return (ret);
+	ws = (wchar_t *)va_arg(ap, wchar_t);
+	wslen = ft_strlen((char *)ws);
+	
+	
 }

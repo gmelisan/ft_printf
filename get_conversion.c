@@ -6,20 +6,20 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/26 18:24:19 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 14:07:45 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 14:43:36 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int				is_flag(char c)
+static int		is_flag(char c)
 {
 	if (c == '#' || c == '0' || c == '+' || c == '-' || c == ' ')
 		return (1);
 	return (0);
 }
 
-int				is_length(char c)
+static int		is_length(char c)
 {
 	if (c == 'l' || c == 'h' || c == 'L' || c == 'j' || c == 'z')
 		return (1);

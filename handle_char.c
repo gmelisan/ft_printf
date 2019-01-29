@@ -6,7 +6,7 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:26:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 09:33:43 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 12:23:15 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ void	handle_char(va_list ap, t_conversion *conv)
 		else
 			conv->out[len - 1] = c;
 		conv->outlen = len;
-		write(1, conv->out, conv->outlen);
 	}
 }

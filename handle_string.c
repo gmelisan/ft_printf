@@ -6,16 +6,11 @@
 /*   By: gmelisan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/28 16:27:24 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/28 10:03:50 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/28 16:43:03 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	handle_wstring(va_list ap, t_conversion *conv)
-{
-	
-}
 
 void	convert_string(t_conversion *conv, char *str)
 {
@@ -37,8 +32,6 @@ void	convert_string(t_conversion *conv, char *str)
 void	handle_string(va_list ap, t_conversion *conv)
 {
 	char	*str;
-	int		len;
-	size_t	strsize;
 	int		nullstr_flag;
 
 	if (conv->type == 'S' || conv->length >= L_L)
@@ -53,7 +46,6 @@ void	handle_string(va_list ap, t_conversion *conv)
 			nullstr_flag = 1;
 		}
 		convert_string(conv, str);
-		write(1, conv->out, conv->outlen);
 		if (nullstr_flag)
 			ft_strdel(&str);
 	}
