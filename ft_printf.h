@@ -6,12 +6,12 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/25 15:56:36 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/29 19:25:28 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:56:52 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** format:		%[flags][width][.precision][length]type
+** format: %[flags][width][.precision][length]type
 ** This implementation is BSD-like, meaning all conversion modifiers
 ** can be specified in random order.
 */

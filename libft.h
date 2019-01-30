@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kemmeric <kemmeric@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:20:56 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/21 17:18:01 by gmelisan         ###   ########.fr       */
+/*   Updated: 2018/12/20 12:30:40 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 # include <string.h>
 
-typedef unsigned char		t_uchar;
-typedef unsigned int		t_uint;
-typedef unsigned long int	t_ulint;
+typedef unsigned char	t_uchar;
+typedef unsigned int	t_uint;
 
 /*
 ** libc functions
@@ -54,8 +53,6 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					ft_isspace(int c);
 int					ft_abs(int value);
-int					ft_sqrt(int nb);
-void				ft_strarrdel(char ***tab);
 
 /*
 ** Additional functions
@@ -234,7 +231,7 @@ char				**ft_strsplit(char const *s, char c);
 ** return: The array of "fresh" strings result of the split.
 */
 
-char				*ft_itoa(long int n);
+char				*ft_itoa(int n);
 
 /*
 ** Allocate (with malloc(3)) and returns a "fresh" string ending with
@@ -362,27 +359,11 @@ typedef struct		s_gnlbuf
 	char			buf[BUFF_SIZE];
 }					t_gnlbuf;
 
-/*
-** Reads one line from fd. Line is a succession of characters until '\n'
-** or EOF. Returns 1 on success, 0 if EOF and -1 in case of error.
-*/
-
 int					get_next_line(const int fd, char **line);
-
-/*
-** Gets array of n lines readed from fd. Returns number of readed lines
-** or -1 in case of error.
-*/
-
-int					ft_get_lines(int fd, char ***lines, int n);
 
 /*
 ** Lists manipulation functions
 */
-
-int					ft_sqrt(int nb);
-
-void				ft_strarrdel(char ***tab);
 
 typedef struct		s_list
 {
@@ -397,7 +378,5 @@ void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void				ft_lstaddback(t_list **alst, t_list *new);
-size_t				ft_lstsize(t_list *lst);
 
 #endif

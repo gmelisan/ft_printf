@@ -6,7 +6,7 @@
 /*   By: gmelisan <gmelisan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 16:33:04 by gmelisan          #+#    #+#             */
-/*   Updated: 2019/01/29 18:02:18 by gmelisan         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:31:33 by gmelisan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,14 @@ void				number_to_string_e(t_conversion *conv, long double n)
 		n = -n;
 	normalize_e(&n, &digits);
 	if (conv->prec_set && conv->precision == 0)
-		len = 1 + (conv->flags.hash ? 1 : 0) + 1;
+		len = 1 + 1 + 1;
 	else
 		len = 1 + 1 + conv->precision + 1;
 	conv->out = ft_strnew(len);
 	shift_point_1(n, conv->out, conv->precision);
 	round_str(conv->out, len - 1, 0);
-	add_e(&(conv->out), len - 1, conv->type, digits - 1);
+	if (conv->prec_set && conv->precision == 0 && !conv->flags.hash)
+		add_e(&(conv->out), len - 2, conv->type, digits - 1);
+	else
+		add_e(&(conv->out), len - 1, conv->type, digits - 1);
 }
